@@ -152,8 +152,59 @@ The following diagram captures the core components of this chapter:
 
  .. figure:: _figures/Diagram.png
 
-TODO: under development
+1. Get Zone
+************************************************************************
 
+TODO: replace screenshots
+.. figure:: _figures/3_1.png
+.. figure:: _figures/3_2.png
+
+2. Create Primary DNS
+************************************************************************
+
+TODO: add screens of creating F5 DNS
+
+3. Create EAP Apps
+************************************************************************
+.. figure:: _figures/2_3.png
+.. figure:: _figures/2_4.png
+.. figure:: _figures/2_5.png
+.. figure:: _figures/2_6.png
+.. figure:: _figures/2_7.png
+.. figure:: _figures/2_8.png
+.. figure:: _figures/2_8_1.png
+
+Repeat this step for fr-acution.{{zone_name}}
+
+3. Create DNSLB App
+************************************************************************
+
+.. figure:: _figures/2_9.png
+.. figure:: _figures/2_10.png
+.. figure:: _figures/2_11.png
+
+4. Configure DNSLB Pool
+************************************************************************
+
+.. figure:: _figures/2_12.png
+.. figure:: _figures/2_13.png
+.. figure:: _figures/2_14.png
+.. figure:: _figures/2_15.png
+.. figure:: _figures/2_16.png
+.. figure:: _figures/2_17.png
+
+Repeate for the fr-auction.{{zone_name}} zone
+
+As a result you should have
+
+.. figure:: _figures/2_18.png
+
+5. Configure DNSLB Load Balanced Record
+************************************************************************
+
+.. figure:: _figures/2_19.png
+.. figure:: _figures/2_20.png
+.. figure:: _figures/2_21.png
 
 Protect one whole LB record
 #####################
@@ -162,6 +213,15 @@ The following diagram captures the core components of this chapter:
 
 .. figure:: _figures/Diagram.png
 
+6. Test ant attack
+************************************************************************
+
+TODO: add screens
+
+7. Cleanup
+************************************************************************
+
+TODO: add screens
 
 1. Get Zone
 ************************************************************************
