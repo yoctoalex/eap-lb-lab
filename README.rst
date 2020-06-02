@@ -206,13 +206,6 @@ As a result you should have
 .. figure:: _figures/2_20.png
 .. figure:: _figures/2_21.png
 
-Protect one whole LB record
-#####################
-
-The following diagram captures the core components of this chapter:
-
-.. figure:: _figures/Diagram.png
-
 6. Test ant attack
 ************************************************************************
 
@@ -222,6 +215,14 @@ TODO: add screens
 ************************************************************************
 
 TODO: add screens
+
+
+Protect one whole LB record
+#####################
+
+The following diagram captures the core components of this chapter:
+
+.. figure:: _figures/Diagram.png
 
 1. Get Zone
 ************************************************************************
