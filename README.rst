@@ -65,7 +65,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `c)` Download collection **{{ TODO COLLECTION_NAME }}.postman_collection.json** and environment **{{ TODO COLLECTION_NAME }}.postman_environment.json** for Postman `here <https://bit.ly/2PK0z1J>`_. Import them to your Postman.
 
-.. figure:: _figures/0_6.jpg
+.. figure:: _figures/0_6.png
 
 You will now see your collection (left side) with calls in several categories, as well as environment variables (top right).
 
