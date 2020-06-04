@@ -80,7 +80,7 @@ Protect EAP multiple endpoints
 
 The following diagram captures the core components of this chapter:
 
- .. figure:: _figures/Diagram.png
+ .. figure:: _figures/chart_1_0.png
 
 
 1. Get FQDN Record
@@ -150,7 +150,7 @@ DNSLB – protect each of 3 Endpoints
 
 The following diagram captures the core components of this chapter:
 
- .. figure:: _figures/Diagram.png
+ .. figure:: _figures/chart_2_0.png
 
 1. Get Zone
 ************************************************************************
@@ -222,7 +222,7 @@ Protect one whole LB record
 
 The following diagram captures the core components of this chapter:
 
-.. figure:: _figures/Diagram.png
+.. figure:: _figures/chart_3_0.png
 
 1. Get Zone
 ************************************************************************
