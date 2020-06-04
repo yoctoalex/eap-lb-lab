@@ -70,6 +70,7 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 You will now see your collection (left side) with calls in several categories, as well as environment variables (top right).
 
 TODO: image
+
 .. figure:: _figures/0_7.png
 
 You are now ready to interface with the F5 Cloud Services using Postman.
@@ -87,8 +88,11 @@ The following diagram captures the core components of this chapter:
 ************************************************************************
 
 ** TODO: replace **
+
 .. figure:: _figures/1_1.png
+
 ** TODO: replace **
+
 .. figure:: _figures/1_2.png
 
 
@@ -107,19 +111,26 @@ The following diagram captures the core components of this chapter:
 
 .. figure:: _figures/1_8.png
 .. figure:: _figures/1_9.png
+
 Configure Europe region. Add endpoint in France
 ** TODO: replace **
+
 .. figure:: _figures/1_11.png
+
 As a result we should have:
+
 .. figure:: _figures/1_12.png
 .. figure:: _figures/1_13.png
+
 On the map
+
 .. figure:: _figures/1_14.png
 
 4. Update CNAME
 ************************************************************************
 
 ** TODO: replace **
+
 .. figure:: _figures/1_14_1.png
 .. figure:: _figures/1_14_2.png
 .. figure:: _figures/1_14_3.png
@@ -146,7 +157,9 @@ On the map
 .. figure:: _figures/1_23.png
 .. figure:: _figures/1_25.png
 .. figure:: _figures/1_26.png
+
 ** TODO: replace (remove 1 endpoint) **
+
 .. figure:: _figures/1_27.png
 .. figure:: _figures/1_28.png
 
@@ -162,6 +175,7 @@ The following diagram captures the core components of this chapter:
 ************************************************************************
 
 ** TODO: update screenshot **
+
 .. figure:: _figures/3_2.png
 
 2. Create DNS LB App
