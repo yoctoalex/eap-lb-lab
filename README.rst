@@ -86,7 +86,9 @@ The following diagram captures the core components of this chapter:
 1. Get FQDN Record
 ************************************************************************
 
+** TODO: replace **
 .. figure:: _figures/1_1.png
+** TODO: replace **
 .. figure:: _figures/1_2.png
 
 
@@ -94,29 +96,41 @@ The following diagram captures the core components of this chapter:
 ************************************************************************
 
 .. figure:: _figures/1_3.png
+.. figure:: _figures/1_3_1.png
 .. figure:: _figures/1_4.png
 .. figure:: _figures/1_5.png
 .. figure:: _figures/1_6.png
 .. figure:: _figures/1_7.png
 
-3. Add multiple endpoints
+3. Add new endpoint
 ************************************************************************
 
 .. figure:: _figures/1_8.png
 .. figure:: _figures/1_9.png
-.. figure:: _figures/1_10.png
+Configure Europe region. Add endpoint in France
+** TODO: replace **
 .. figure:: _figures/1_11.png
+As a result we should have:
 .. figure:: _figures/1_12.png
 .. figure:: _figures/1_13.png
+On the map
 .. figure:: _figures/1_14.png
 
-4. Test geolocation with opera browser
+4. Update CNAME
+************************************************************************
+
+** TODO: replace **
+.. figure:: _figures/1_14_1.png
+.. figure:: _figures/1_14_2.png
+.. figure:: _figures/1_14_3.png
+
+5. Test geolocation with opera browser
 ************************************************************************
 
 .. figure:: _figures/1_15.png
 .. figure:: _figures/1_16.png
 
-5. Execute an attack
+6. Execute an Illegal Filetype attack
 ************************************************************************
 
 .. figure:: _figures/1_17.png
@@ -126,95 +140,15 @@ The following diagram captures the core components of this chapter:
 .. figure:: _figures/1_21.png
 .. figure:: _figures/1_22.png
 
-6. Enable all protection and simulate more attacks
+7. Enable all protection and simulate more attacks
 ************************************************************************
 
 .. figure:: _figures/1_23.png
-.. figure:: _figures/1_24.png
 .. figure:: _figures/1_25.png
 .. figure:: _figures/1_26.png
+** TODO: replace (remove 1 endpoint) **
 .. figure:: _figures/1_27.png
 .. figure:: _figures/1_28.png
-.. figure:: _figures/1_2.png
-
-7. Cleanup
-************************************************************************
-
-.. figure:: _figures/1_29.png
-.. figure:: _figures/1_30.png
-.. figure:: _figures/1_31.png
-.. figure:: _figures/1_32.png
-
-DNSLB – protect each of 3 Endpoints
-#####################
-
-The following diagram captures the core components of this chapter:
-
- .. figure:: _figures/chart_2_0.png
-
-1. Get Zone
-************************************************************************
-
-TODO: replace screenshots
-.. figure:: _figures/3_1.png
-.. figure:: _figures/3_2.png
-
-2. Create Primary DNS
-************************************************************************
-
-TODO: add screens of creating F5 DNS
-
-3. Create EAP Apps
-************************************************************************
-.. figure:: _figures/2_3.png
-.. figure:: _figures/2_4.png
-.. figure:: _figures/2_5.png
-.. figure:: _figures/2_6.png
-.. figure:: _figures/2_7.png
-.. figure:: _figures/2_8.png
-.. figure:: _figures/2_8_1.png
-
-Repeat this step for fr-acution.{{zone_name}}
-
-3. Create DNSLB App
-************************************************************************
-
-.. figure:: _figures/2_9.png
-.. figure:: _figures/2_10.png
-.. figure:: _figures/2_11.png
-
-4. Configure DNSLB Pool
-************************************************************************
-
-.. figure:: _figures/2_12.png
-.. figure:: _figures/2_13.png
-.. figure:: _figures/2_14.png
-.. figure:: _figures/2_15.png
-.. figure:: _figures/2_16.png
-.. figure:: _figures/2_17.png
-
-Repeate for the fr-auction.{{zone_name}} zone
-
-As a result you should have
-
-.. figure:: _figures/2_18.png
-
-5. Configure DNSLB Load Balanced Record
-************************************************************************
-
-.. figure:: _figures/2_19.png
-.. figure:: _figures/2_20.png
-.. figure:: _figures/2_21.png
-
-6. Test ant attack
-************************************************************************
-
-TODO: add screens
-
-7. Cleanup
-************************************************************************
-
-TODO: add screens
 
 
 Protect one whole LB record
@@ -227,20 +161,15 @@ The following diagram captures the core components of this chapter:
 1. Get Zone
 ************************************************************************
 
-.. figure:: _figures/3_1.png
+** TODO: update screenshot **
 .. figure:: _figures/3_2.png
 
-2. Create Primary DNS
-************************************************************************
-
-TODO: add screens of creating F5 DNS
-
-3. Create DNS LB App
+2. Create DNS LB App
 ************************************************************************
 
 .. figure:: _figures/3_3.png
 .. figure:: _figures/3_4.png
-.. figure:: _figures/3_5.png-
+.. figure:: _figures/3_5.png
 
 4. Add LB endpoints
 ************************************************************************
@@ -250,7 +179,6 @@ TODO: add screens of creating F5 DNS
 .. figure:: _figures/3_8.png
 .. figure:: _figures/3_9.png
 .. figure:: _figures/3_10.png
-.. figure:: _figures/3_11.png
 
 5. Configure LB Pool
 ************************************************************************
@@ -260,7 +188,6 @@ TODO: add screens of creating F5 DNS
 .. figure:: _figures/3_14.png
 .. figure:: _figures/3_15.png
 .. figure:: _figures/3_16.png
-.. figure:: _figures/3_17.png
 .. figure:: _figures/3_18.png
 
 6. Configure Load Balanced Records
@@ -270,27 +197,84 @@ TODO: add screens of creating F5 DNS
 .. figure:: _figures/3_20.png
 .. figure:: _figures/3_21.png
 
-7. Create EAP App
+7. Update EAP App
 ************************************************************************
 
-.. figure:: _figures/3_22.png
-.. figure:: _figures/3_23.png
-.. figure:: _figures/3_24.png
-.. figure:: _figures/3_25.png
-.. figure:: _figures/3_26.png
-.. figure:: _figures/3_27.png
-.. figure:: _figures/3_28.png
-.. figure:: _figures/3_29.png
-.. figure:: _figures/3_30.png
+.. figure:: _figures/3_40.png
+.. figure:: _figures/3_41.png
+.. figure:: _figures/3_42.png
+.. figure:: _figures/3_43.png
+.. figure:: _figures/3_44.png
+.. figure:: _figures/3_45.png
 
-TODO: add screens of updating cname with postman
-
-8. Enable all protection and simulate more attacks
-************************************************************************
-
-TODO: add screens or move to the separate chapter
-
-9. Cleanup
+8. Test Round Robin in Opera Browser
 ************************************************************************
 
 TODO: add screens
+
+9. Simulate SQL injection attack
+************************************************************************
+
+TODO: add screens
+
+
+DNSLB – protect each of 2 Endpoints
+#####################
+
+The following diagram captures the core components of this chapter:
+
+ .. figure:: _figures/chart_2_0.png
+
+1. Update EAP Application with API
+************************************************************************
+
+TODO: replace screenshots
+Update our existing EAP application
+
+.. figure:: _figures/2_30.png
+.. figure:: _figures/2_31.png
+
+Create a second Application for Europe
+
+.. figure:: _figures/2_32.png
+.. figure:: _figures/2_33.png
+
+
+2. Configure DNSLB Pools
+************************************************************************
+
+.. figure:: _figures/2_34.png
+.. figure:: _figures/2_35.png
+.. figure:: _figures/2_36.png
+.. figure:: _figures/2_37.png
+.. figure:: _figures/2_38.png
+.. figure:: _figures/2_39.png
+.. figure:: _figures/2_40.png
+.. figure:: _figures/2_41.png
+.. figure:: _figures/2_42.png
+.. figure:: _figures/2_43.png
+.. figure:: _figures/2_44.png
+.. figure:: _figures/2_45.png
+
+
+5. Configure DNSLB Load Balanced Record
+************************************************************************
+
+.. figure:: _figures/2_46.png
+.. figure:: _figures/2_47.png
+.. figure:: _figures/2_48.png
+.. figure:: _figures/2_49.png
+.. figure:: _figures/2_50.png
+.. figure:: _figures/2_51.png
+.. figure:: _figures/2_52.png
+
+6. Test GEO LB and attack
+************************************************************************
+
+TODO: add screens
+
+7. Cleanup
+************************************************************************
+
+TODO: add screens
+
