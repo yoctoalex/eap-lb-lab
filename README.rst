@@ -231,63 +231,7 @@ TODO: add screens
 
 TODO: add screens
 
-
-DNSLB – protect each of 2 Endpoints
-#####################
-
-The following diagram captures the core components of this chapter:
-
- .. figure:: _figures/chart_2_0.png
-
-1. Update EAP Application with API
-************************************************************************
-
-TODO: replace screenshots
-Update our existing EAP application
-
-.. figure:: _figures/2_30.png
-.. figure:: _figures/2_31.png
-
-Create a second Application for Europe
-
-.. figure:: _figures/2_32.png
-.. figure:: _figures/2_33.png
-
-
-2. Configure DNSLB Pools
-************************************************************************
-
-.. figure:: _figures/2_34.png
-.. figure:: _figures/2_35.png
-.. figure:: _figures/2_36.png
-.. figure:: _figures/2_37.png
-.. figure:: _figures/2_38.png
-.. figure:: _figures/2_39.png
-.. figure:: _figures/2_40.png
-.. figure:: _figures/2_41.png
-.. figure:: _figures/2_42.png
-.. figure:: _figures/2_43.png
-.. figure:: _figures/2_44.png
-.. figure:: _figures/2_45.png
-
-
-5. Configure DNSLB Load Balanced Record
-************************************************************************
-
-.. figure:: _figures/2_46.png
-.. figure:: _figures/2_47.png
-.. figure:: _figures/2_48.png
-.. figure:: _figures/2_49.png
-.. figure:: _figures/2_50.png
-.. figure:: _figures/2_51.png
-.. figure:: _figures/2_52.png
-
-6. Test GEO LB and attack
-************************************************************************
-
-TODO: add screens
-
-7. Cleanup
+10. Cleanup
 ************************************************************************
 
 TODO: add screens
