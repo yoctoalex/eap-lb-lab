@@ -203,6 +203,7 @@ c) Paste the record name you copied in step 2.a) above into **"Fully Qualified D
 .. figure:: _figures/1_3_1.png
 
 TBD 
+
 .. figure:: _figures/1_4.png
 .. figure:: _figures/1_5.png
 .. figure:: _figures/1_6.png
