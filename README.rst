@@ -64,20 +64,29 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.
 
-`b)` Clone or download and extract the repository:
+`b)` Import collection and environment JSON files from the `Git repo for this lab <https://bit.ly/3eb8yhN>`_: 
 
-.. figure:: _figures/0_5.png
+- collection: https://bit.ly/2ZavYj2
+- environment: https://bit.ly/3ffTcd2
 
-`c)` Download collection **F5 Load Balance and Protect Apps.postman_collection.json** and environment **F5 Load Balance and Protect Apps.postman_environment.json** for Postman `here <https://bit.ly/38zSrck>`_. Import them to your Postman.
+.. figure:: _figures/0_23.png
 
-.. figure:: _figures/0_6.png
+.. figure:: _figures/0_24.png
 
-You will now see your collection (left side) with calls in several categories, as well as environment variables (top right).
+Repeat the steps above for the environment JSON file. You will now see the imported collection (left side) with calls in several categories, as well as environment variables (top right) used to store and pass data between Postman and the API.
 
 .. figure:: _figures/0_7.png
 
 You are now ready to interface with the F5 Cloud Services using Postman.
 
+3. Opera Browser with VPN to Test Geolocation
+**************************
+
+In order to test geo-proximity rules, you can use your own VPN service (if you have one), remote desktop to a VM in a different region (if you have one), or alternatively use the Opera browser. 
+
+Open the Opera browser, click **Settings, Advanced, Features** and then **Enable VPN**.
+
+.. figure:: _figures/0_25.png
 
 Protect Essential App Protect Multiple Endpoints
 #####################
