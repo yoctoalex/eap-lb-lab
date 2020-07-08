@@ -87,11 +87,11 @@ The following diagram captures the core components of this chapter:
 
 In order to create the Essential App Protect instance in the F5 Cloud Services portal, you need to have an FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.
 
-a) Open the “F5 Load Balance and Protect Apps” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values). Do the same for the “USER_PASSWORD”.
+`a)` Open the “F5 Load Balance and Protect Apps” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values). Do the same for the “USER_PASSWORD”.
 
 .. figure:: _figures/0_8.png
 
-b) Select the **Login** request in the sidebar to login to your F5 Cloud Services profile and click **Send** to get the authorization token. More detailed information on this API request can be found `here <https://bit.ly/2ZauPbi>`_.
+`b)` Select the **Login** request in the sidebar to login to your F5 Cloud Services profile and click **Send** to get the authorization token. More detailed information on this API request can be found `here <https://bit.ly/2ZauPbi>`_.
 
 .. figure:: _figures/1_1.png
 
@@ -107,7 +107,7 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/0_11.png TBD
 
-c) OPTIONAL (existing F5 cloud service accounts only): **Set User Info**
+`c)` OPTIONAL (existing F5 cloud service accounts only): **Set User Info**
 
 **IMPORTANT NOTE**: You can skip this step and proceed to step (d) if you have just created a brand new account.
 
@@ -125,7 +125,7 @@ More information on this API request can be found `here <https://bit.ly/2Z9mswr>
 
 At this point you should be a full user with an "Owned Account" and a primary organization account id, which can also be confirmed in the F5 Cloud Services Portal in the drop-down under your user name (top right), where you should see "Accounts you own:" and the Organization Account you created with **"Owner"** defined.
 
-d) Retrieve User ID & Account ID
+`d)` Retrieve User ID & Account ID
 
 Select the **Get Current User** request and click **Send** to retrieve User ID and Account ID to be used in the further requests.
 
@@ -141,7 +141,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <https://bit.ly/38DsMj5>`_. 
 
-e) Retrieve information on available catalogs and their IDs
+`e)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve the data about the available Catalogs and their IDs.
 
@@ -157,7 +157,7 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 
 More detailed information on this API call can be found `here <https://bit.ly/3iJhTR5>`_. 
 
-f) Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal. The request is as follows:
+`f)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal. The request is as follows:
 
 .. figure:: _figures/0_20.png
 
