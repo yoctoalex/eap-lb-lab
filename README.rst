@@ -290,9 +290,6 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 .. figure:: _figures/1_23.png
 .. figure:: _figures/1_25.png
 .. figure:: _figures/1_26.png
-
-** TODO: replace (remove 1 endpoint) **
-
 .. figure:: _figures/1_27.png
 .. figure:: _figures/1_28.png
 
@@ -354,18 +351,23 @@ The following diagram captures the core components of this chapter:
 .. figure:: _figures/3_44.png
 .. figure:: _figures/3_45.png
 
-8. Test Round Robin in Opera Browser
+8. Simulate SQL injection attack
 ************************************************************************
+
+Open link in the browser and click login
+username: ' OR 1=1 --'
+password: 'any value'
+
+.. figure:: _figures/3_46.png
+.. figure:: _figures/3_47.png
 
 TODO: add screens
 
-9. Simulate SQL injection attack
-************************************************************************
 
-TODO: add screens
+Cleanup
+#####################
 
-10. Cleanup
-************************************************************************
-
-TODO: add screens
-
+.. figure:: _figures/4_1.png
+.. figure:: _figures/4_2.png
+.. figure:: _figures/4_3.png
+.. figure:: _figures/4_4.png
