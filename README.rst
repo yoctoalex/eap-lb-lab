@@ -190,8 +190,19 @@ When this request completes successfully the value of the FQDN Record will be ca
 2. Create Essential App Protect Application
 ************************************************************************
 
+`a)` In order to create the Essential App Protect service, we need the FQDN Record info from a previously run API call. You can retrieve it by opening the **Get FQDN Record type (lab)** request in Postman and copying the value of the "record" key in the response.
+
+.. figure:: _figures/1_2.png
+
+b) Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**.
+
 .. figure:: _figures/1_3.png
+
+c) Paste the record name you copied in step 2.a) above into **"Fully Qualified Domain Name (FQDN)"** field. The **"Name this application"** field will auto-populate; keep this value as-is for simplicity. The **"Add a description"** field is optional. Click **Save & Continue**.
+
 .. figure:: _figures/1_3_1.png
+
+TBD 
 .. figure:: _figures/1_4.png
 .. figure:: _figures/1_5.png
 .. figure:: _figures/1_6.png
