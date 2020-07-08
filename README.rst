@@ -194,38 +194,68 @@ When this request completes successfully the value of the FQDN Record will be ca
 
 .. figure:: _figures/1_2.png
 
-b) Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**.
+`b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**.
 
 .. figure:: _figures/1_3.png
 
-c) Paste the record name you copied in step 2.a) above into **"Fully Qualified Domain Name (FQDN)"** field. The **"Name this application"** field will auto-populate; keep this value as-is for simplicity. The **"Add a description"** field is optional. Click **Save & Continue**.
+`c)` Paste the record name you copied in step 2.a) above into **"Fully Qualified Domain Name (FQDN)"** field. The **"Name this application"** field will auto-populate; keep this value as-is for simplicity. The **"Add a description"** field is optional. Click **Save & Continue**.
 
 .. figure:: _figures/1_3_1.png
 
-TBD 
+Essential App Protect does an FQDN lookup to retrieve the corresponding IP of the FQDN record, and will gather info on the location and geo-proximity of the nearest cloud region, and will display these as recommendations as to where to deploy the EAP instance.
+
+At this point, some users may want to select a different value in the drop-down for the EAP Region, which you can update/change at any time in the EAP instance settings after the instance setup.
+
+**NOTE**: If after a minute you don't see the endpoint info, hit refresh and click "Complete Setup" to return to this step / see the info.
+
+Click **Save & Continue**.
 
 .. figure:: _figures/1_4.png
+
+Note the info on the IP, City, State, and the Cloud Provider used by our test application. It also shows the region used by the cloud provider derived from the FQDN/IP information. As you can see in the screenshot, the example test app endpoint is located in North America, US East (N. Virginia) and is deployed on Amazon AWS. Note that the default configuration will be to route the traffic that's hitting the EAP instance to the identified IP address of the application endpoint.
+
+`d)` You can now provide an SSL/TLS certificate if you want to. However, for the lab at this point we will skip uploading the certificate and for now will only select "Enable HTTP Listener" with Port 80, and uncheck "Enable HTTPS Listener", then click **Save & Continue**.
+
 .. figure:: _figures/1_5.png
+
+`e)` Accept the defaults for all of the app protect features on the next screen and click **Save & Continue**. In case you need to update this property in the future, you can do so later in the **PROTECT APPLICATION** section.
+
 .. figure:: _figures/1_6.png
+
+`f)` Here take note of the **CNAME** value that's generated for your Essential App Protect instance. This value will be used to update our application's DNS record by changing it from an IP address to a CNAME. You should probably copy + paste it to a temporary document, but we'll also retrieve it through the UI and an API call later. Click **Done** and Essential App Protect service will be created and should be ready for use shortly.
+
 .. figure:: _figures/1_7.png
+
+**IMPORTANT**: Note that this process may take some time. You can check the status in the **All my applications** option of the dropdown menu:
+
+.. figure:: _figures/0_27.png
 
 3. Add new endpoint
 ************************************************************************
 
+As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and is deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Frankfurt for European users.
+
+`a)` Go to the F5 Cloud Services Portal, the **Essential App Protect** service and move on to the **PROTECT APPLICATION** card. There, in the **General** tab, select **Manage regions**.
+
 .. figure:: _figures/1_8.png
+
+`b)` Hit **Add**: 
+
 .. figure:: _figures/1_9.png
 
-Configure Europe region. Add endpoint in France
-** TODO: replace **
+`c)` Configure the Europe region. First, select **AWS: Europe (Frankfurt) eu-central-1** region from the drop-down menu and then select **IP Address** as endpoint type. Fill in the **IP Address** field with **35.180.122.91** and **Enable HTTP** port, **80**. **Save** the settings.     
 
 .. figure:: _figures/1_11.png
 
-As a result we should have:
+As a result, we'll see both of your app's endpoints:
 
 .. figure:: _figures/1_12.png
+
+IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLICATION** card. 
+
 .. figure:: _figures/1_13.png
 
-On the map
+`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, US East (N. Virginia), another in Europe (Frankfurt).
 
 .. figure:: _figures/1_14.png
 
