@@ -129,15 +129,15 @@ d) Retrieve User ID & Account ID
 
 Select the **Get Current User** request and click **Send** to retrieve User ID and Account ID to be used in the further requests.
 
-.. figure:: _figures/0_14.jpg
+.. figure:: _figures/0_14.png
 
 The response returns the following detail:
 
-.. figure:: _figures/0_15.jpg
+.. figure:: _figures/0_15.png
 
 The retrieved User ID and Account ID are then stored for subsequent calls.
 
-.. figure:: _figures/0_16.jpg
+.. figure:: _figures/0_16.png
 
 More detailed information on this API request can be found `here <https://bit.ly/38DsMj5>`_. 
 
@@ -145,21 +145,21 @@ e) Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve the data about the available Catalogs and their IDs.
 
-.. figure:: _figures/0_17.jpg
+.. figure:: _figures/0_17.png
 
 You can see the available catalogs:
 
-.. figure:: _figures/0_18.jpg
+.. figure:: _figures/0_18.png
 
 The retrieved IDs are then stored for subsequent calls using a function inside Postman that sets environment variables. You can see the test function in the "Tests" tab of the request:
 
-.. figure:: _figures/0_19.jpg
+.. figure:: _figures/0_19.png
 
 More detailed information on this API call can be found `here <https://bit.ly/3iJhTR5>`_. 
 
 f) Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal. The request is as follows:
 
-.. figure:: _figures/0_20.jpg
+.. figure:: _figures/0_20.png
 
 The response will return your record name, its status, current type and value.
 
