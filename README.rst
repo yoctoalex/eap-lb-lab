@@ -8,10 +8,11 @@ Pre-Requisites
 
 - Any modern browser: for working with the UI (and this document)
 - Postman: for working with the API of the F5 Cloud Services
+- Opera browser: for simulating geo-location specific traffic
 
 **IMPORTANT NOTE**: If you originally signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account owner), then it is possible that you haven't yet completed a full registration.
 
-You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account & update user info before you can proceed with this lab. You can do so in the step 3(c) below via the F5 Cloud Services API using the Postman request titled "Set User Info (optional)", the details of which are outlined below after the Login.
+You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account & update user info before you can proceed with this lab. You can do so in the step 3(c) below via the F5 Cloud Services API using the Postman request titled **"Set User Info (optional)"**, the details of which are outlined below after the Login.
 
 Lab Environment Overview
 ###############################
@@ -39,7 +40,7 @@ Once you've logged in with an account, you will be using the user name and passw
 
 `b)` Subscribe to Catalogs
 
-In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect and DNS Load Balancer services, so you will need to subscribe to them. At the time of subscribing, you can take an advantage of a 15-day free trial offer to work with F5 Essential App Protect service -- no payment method required!
+In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect and DNS Load Balancer services, so you will need to subscribe to them. At the time of the writing of this lab you can take advantage of a 15-day free trial offer to work with F5 Essential App Protect service -- no payment method required!
 
    `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **DNS Load Balancer** and **Essential App Protect services**.
 
@@ -52,6 +53,10 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
    After successfully subscribing, your services will appear in the **Your F5 Cloud** tab. You will also see their current status.
 
    .. figure:: _figures/0_4.png
+   
+   If you need to check your payment information, it is available in the **Accounts** tab, **Payment** section.
+   
+   .. figure:: _figures/0_22.png
 
 
 2. Postman Configuration
