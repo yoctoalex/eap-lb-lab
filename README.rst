@@ -361,8 +361,6 @@ password: 'any value'
 .. figure:: _figures/3_46.png
 .. figure:: _figures/3_47.png
 
-TODO: add screens
-
 
 Cleanup
 #####################
