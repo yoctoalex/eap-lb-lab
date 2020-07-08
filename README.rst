@@ -11,7 +11,7 @@ Pre-Requisites
 
 **IMPORTANT NOTE**: If you originally signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account owner), then it is possible that you haven't yet completed a full registration.
 
-You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do now see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account & update user info before you can proceed with this lab. You can do so in the step 3(c) below via the F5 Cloud Services API using the Postman request titled "Set User Info (optional)", the details of which are outlined below after the Login.
+You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account & update user info before you can proceed with this lab. You can do so in the step 3(c) below via the F5 Cloud Services API using the Postman request titled "Set User Info (optional)", the details of which are outlined below after the Login.
 
 Lab Environment Overview
 ###############################
@@ -31,17 +31,17 @@ Lab Environment Setup
 
 `a)` Login
 
-In order to use F5 Essential App Protect service, you need access to F5 Cloud Services and be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.
+In order to use F5 Essential App Protect and DNS Load Balancer cloud services, you need access to F5 Cloud Services and be logged in with a valid user account. If you need to sign up, or if you already have one, proceed to the `F5 Cloud Services portal <http://bit.ly/f5csreg>`_.
 
 .. figure:: _figures/0_1.png
 
 Once you've logged in with an account, you will be using the user name and password values in the lab to authenticate with the F5 Cloud Services and the API.
 
-`b)` Subscribe to Catalogs TODO: andd DNSLB
+`b)` Subscribe to Catalogs
 
-In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect service, so you will need to subscribe to it. At the time of writing you can take advancate of a 10-day free trial offer to work with this service -- no payment method required!
+In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect and DNS Load Balancer services, so you will need to subscribe to them. At the time of subscribing, you can take an advantage of a 15-day free trial offer to work with F5 Essential App Protect service -- no payment method required!
 
-   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **Essential App Protect** services.
+   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **DNS Load Balancer** and **Essential App Protect services**.
 
    .. figure:: _figures/0_2.png
 
@@ -59,17 +59,15 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.
 
-`b)` Clone or download and extract the repository
+`b)` Clone or download and extract the repository:
 
 .. figure:: _figures/0_5.png
 
-`c)` Download collection **{{ TODO COLLECTION_NAME }}.postman_collection.json** and environment **{{ TODO COLLECTION_NAME }}.postman_environment.json** for Postman `here <https://bit.ly/2PK0z1J>`_. Import them to your Postman.
+`c)` Download collection **F5 Load Balance and Protect Apps.postman_collection.json** and environment **F5 Load Balance and Protect Apps.postman_environment.json** for Postman `here <https://bit.ly/38zSrck>`_. Import them to your Postman.
 
 .. figure:: _figures/0_6.png
 
 You will now see your collection (left side) with calls in several categories, as well as environment variables (top right).
-
-TODO: image
 
 .. figure:: _figures/0_7.png
 
