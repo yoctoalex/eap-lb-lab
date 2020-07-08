@@ -99,7 +99,7 @@ The following diagram captures the core components of this chapter:
 1. Get Fully Qualified Domain Name (FQDN)
 ************************************************************************
 
-In order to create the Essential App Protect instance in the F5 Cloud Services portal, you need to have an FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.
+To protect mulpitple endpoints (North America and Europe), we, first of all, will need to create the Essential App Protect instance in the F5 Cloud Services portal using FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.
 
 `a)` Open the “F5 Load Balance and Protect Apps” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values). Do the same for the “USER_PASSWORD”.
 
@@ -121,13 +121,13 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/0_11.png TBD
 
-`c)` OPTIONAL (existing F5 cloud service accounts only): **Set User Info**
+`c)` OPTIONAL (existing F5 cloud service accounts only): **Set User Info (optional)**
 
 **IMPORTANT NOTE**: You can skip this step and proceed to step (d) if you have just created a brand new account.
 
    However, if you were previously signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account    owner), then it is possible that you haven't yet completed a full registration. You can quickly tell if you have by looking at your account(s) in the F5 Cloud Services Portal If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a "Limited User", then you need to create a full account & update user info before you can proceed with this lab.
    
-You can do this by running the following **Set User Info** API call, after you've updated the Body of the request with your own organization & address information:
+You can do this by running the following **Set User Info (optional)** API call, after you've updated the Body of the request with your own organization & address information:
 
 .. figure:: _figures/0_12.png
 
@@ -177,12 +177,17 @@ More detailed information on this API call can be found `here <https://bit.ly/3i
 
 The response will return your record name, its status, current type and value.
 
-TBD
-
 .. figure:: _figures/1_2.png
 
+Note that at this stage our test application is using an A-record to route traffic that's going to the FQDN to the IP of the app server. During the lab we will update this DNS record to a CNAME generated during the Essential App Protect instance setup, so that the app traffic will be directed to Essential App Protect instance first, and then the "scrubbed" traffic will be directed to our app IP (or FQDN) depending on the configuration.
 
-2. Create EAP App
+When this request completes successfully the value of the FQDN Record will be captured as a variable:
+
+.. figure:: _figures/0_26.png
+
+**IMPORTANT NOTE**: Make note of this FQDN record; we will use it many times throughout the lab, and for creating the Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test application.
+
+2. Create Essential App Protect Application
 ************************************************************************
 
 .. figure:: _figures/1_3.png
