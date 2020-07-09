@@ -341,17 +341,39 @@ Go back to the F5 Cloud Services portal to the **VIEW EVENTS** card and see the 
 
 .. figure:: _figures/1_22.png
 
-7. Enable all protection and simulate more attacks
+7. Enable All Protection and Simulate More Attacks
 ************************************************************************
 
+For now only **High-risk Attack Mitigation** attacks are in **Blocking Mode**. Other attacks flowing to your app are only monitored without any actions taken. Let's now activate **Blocking Mode** for the other two attack types. 
+
+`a)` First, go to the **Threat Campaigns** tab and toggle **Blocking Mode** on. Then click **Update** (and give it a few seconds to update).
+
 .. figure:: _figures/1_23.png
+
+`b)` Now move on to the **Malicious IP** tab and toggle **Blocking Mode** on. Then click **Update** (and give it a few seconds to update).
+
 .. figure:: _figures/1_25.png
+
+`c)` Now that the protection mode is "blocking" for all attack types, you can simulate more attacks and see them blocked. So, return to Postman and use our Lab service API to simulate a flood of attacks by sending the **Start EAP Attack (lab) Copy** request.
+
 .. figure:: _figures/1_26.png
+
+`d)` Check the map
+
+Let’s go back to the F5 Cloud Services portal and check the map in the **MONITOR APPLICATION** tab.
+
+You can see our two app endpoints (blue circles) and the latest attacks on the map:
+
 .. figure:: _figures/1_27.png
+
+`e)` View Events 
+
+You can analyze the details of these attacks via the F5 Cloud Services portal in the **VIEW EVENTS** tab of the EAP service. URI, Severity, Category, Violations, Type, Status, IP Address and Source location are shown there.   
+
 .. figure:: _figures/1_28.png
 
 
-Protect one whole LB record
+Protect One Whole LB Record
 #####################
 
 The following diagram captures the core components of this chapter:
