@@ -293,30 +293,30 @@ Now let’s test the protected app, as well as the multi-region support using th
 6. Execute an Illegal Filetype Attack
 ************************************************************************
 
-At this point all attacks on our app are only monitored but not yet blocked. 
+At this point our app is configured for monitoring mode, and so it does not yet block any malicious traffic. 
 
-First, let's simulate one of attack types - illegal file type in **Monitoring** mode. This attack combines a valid URL path segment with invalid input to guess or brute-force download of sensitive files or data. More detailed information can be found `here <https://bit.ly/3eaVB7C>`_. And then we can change **Monitoring** to **Blocking** and see how it works.
+Nevertheless, let's simulate an attack: illegal file type in **Monitoring** mode. This attack combines a valid URL path segment with various additional input to try to guess or brute-force download of sensitive files or data. More detailed information can be found `here <https://bit.ly/3eaVB7C>`_. And then we can change **Monitoring** to **Blocking** and see the difference.
 
 `a)` In the F5 Cloud Services portal go to **VIEW EVENTS** card which shows different event types for your app. For now, there are no events shown.    
 
 .. figure:: _figures/1_17.png
 
-`b)` Open any browser, paste **FQDN** of your app and add **/nginx.config**:   
+`b)` Open any browser, paste **FQDN** of your app and add at the end: **/nginx.config**
 
 .. figure:: _figures/1_18.png
 
-Considering that attacks aren't blocked and only monitored for now, **nginx.config** will be downloaded.  
+Considering that attacks aren't blocked and only monitored for now, the server will respond with a file **nginx.config** that happens to exist on the server. This simulates an attacker brute-forcing a .config file download, and this scenario is precisely what we'll try to catch next. 
 
-`c)` Let's got back to the F5 Cloud Services portal and see the **VIEW EVENTS** card. It will show all the information about the attack we did above and indicate its status as **Not blocked**.
+`c)` Let's got back to the F5 Cloud Services portal and see the **VIEW EVENTS** card. It will show all the information about the attack and indicate its status as **Not blocked**.
 
 .. figure:: _figures/1_19.png
 
-`d)` Now let's change the mode of **High-risk Attack Mitigation** from **Monitoring** to **Blocking** to block all the coming attacks of that type. To do so, go to the **High-risk Attack Mitigation** tab and toggle **Blocking Mode** on. You can notice that **config** file type is checked as disallowed. Click **Update** (and give it a few seconds to update).
+`d)` Now let's change the mode of **High-risk Attack Mitigation** from **Monitoring** to **Blocking** in order to block all the coming attacks of that type. To do so, go to the **High-risk Attack Mitigation** tab and toggle **Blocking Mode** on. You can notice that **config** file type is checked as disallowed. Click **Update** (and give it a few seconds to update).
 
 .. figure:: _figures/1_20.png
 
 
-`e)` Now we can simulate the same attack again in the browser by pasting **FQDN** of your app and adding **/nginx.config**, and see quite a different result: the attack is not just monitored, but blocked this time!  
+`e)` Now we can simulate the same attack again in the browser by pasting **FQDN** of your app and adding **/nginx.config**, and see quite a different result: the attack is not just monitored, but also blocked this time!  
 
 .. figure:: _figures/1_21.png
 
@@ -324,10 +324,10 @@ Go back to the F5 Cloud Services portal to the **VIEW EVENTS** card and see the 
 
 .. figure:: _figures/1_22.png
 
-7. Enable All Protection and Simulate More Attacks
+7. Enable All Protection and Simulate Additional Attacks
 ************************************************************************
 
-For now only **High-risk Attack Mitigation** attacks are in **Blocking Mode**. Other attacks flowing to your app are only monitored without any actions taken. Let's now activate **Blocking Mode** for the other two attack types. 
+For now only **High-risk Attack Mitigation** attack types are configured to be in **Blocking Mode**. Other malicious traffic or attacks to your app are only monitored without any actions taken. Let's now activate **Blocking Mode** for the other protection. 
 
 `a)` First, go to the **Threat Campaigns** tab and toggle **Blocking Mode** on. Then click **Update** (and give it a few seconds to update).
 
@@ -337,7 +337,7 @@ For now only **High-risk Attack Mitigation** attacks are in **Blocking Mode**. O
 
 .. figure:: _figures/1_25.png
 
-`c)` Now that the protection mode is "blocking" for all attack types, you can simulate more attacks and see them blocked. So, return to Postman and use our Lab service API to simulate a flood of attacks by sending the **Start EAP Attack (lab) Copy** request.
+`c)` Now that the protection mode is "blocking" for all attack types, you can simulate more attacks and see them blocked. So, let's return to Postman and use our Lab service API to simulate a flood of attacks by sending the **Start EAP Attack (lab) Copy** request.
 
 .. figure:: _figures/1_26.png
 
@@ -345,7 +345,7 @@ For now only **High-risk Attack Mitigation** attacks are in **Blocking Mode**. O
 
 Let’s go back to the F5 Cloud Services portal and check the map in the **MONITOR APPLICATION** tab.
 
-You can see our two app endpoints (blue circles) and the latest attacks on the map:
+You can see our two app endpoints (blue circles) and the latest attacks indicated on the map:
 
 .. figure:: _figures/1_27.png
 
@@ -356,10 +356,12 @@ You can analyze the details of these attacks via the F5 Cloud Services portal in
 .. figure:: _figures/1_28.png
 
 
-Protect One Whole LB Record
-#####################
+Add Protection to a Load-Balanced Record
+########################################
 
-In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will let the traffic go through the NDS Load Balancer, which in case of one instance failover can redirect users to another available instance. 
+F5 Essential App Protect can work together with the F5 DNS Load Balancer in order to a protect a load-balanced record. As opposed to the previous scenario, where Essential App Protect used multiple app end-points in different regions for **performance based load-balancing**, the DNS Load Balancer can be used to create advanced geo-proximity load balancing with load-balanced pools and granular controls over regions, countries, and states. 
+
+In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will create a configuration where the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose. 
 
 The following diagram captures the core components of this chapter:
 
@@ -370,7 +372,7 @@ The following diagram captures the core components of this chapter:
 
 To create a DNS Loab Balancer instance, we'll need to get the zone. To do that, send the **Get DNS Zone (lab)** API call. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.
 
-** TODO: update screenshot **
+**TODO: update screenshot**
 
 .. figure:: _figures/3_2.png
 
