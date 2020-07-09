@@ -202,7 +202,7 @@ When this request completes successfully the value of the FQDN Record will be ca
 
 .. figure:: _figures/1_3_1.png
 
-Essential App Protect does an FQDN lookup to retrieve the corresponding IP of the FQDN record, and will gather info on the location and geo-proximity of the nearest cloud region, and will display these as recommendations as to where to deploy the EAP instance.
+`d)` Essential App Protect does an FQDN lookup to retrieve the corresponding IP of the FQDN record, and will gather info on the location and geo-proximity of the nearest cloud region, and will display these as recommendations as to where to deploy the EAP instance.
 
 At this point, some users may want to select a different value in the drop-down for the EAP Region, which you can update/change at any time in the EAP instance settings after the instance setup.
 
@@ -214,15 +214,15 @@ Click **Save & Continue**.
 
 Note the info on the IP, City, State, and the Cloud Provider used by our test application. It also shows the region used by the cloud provider derived from the FQDN/IP information. As you can see in the screenshot, the example test app endpoint is located in North America, US East (N. Virginia) and is deployed on Amazon AWS. Note that the default configuration will be to route the traffic that's hitting the EAP instance to the identified IP address of the application endpoint.
 
-`d)` You can now provide an SSL/TLS certificate if you want to. However, for the lab at this point we will skip uploading the certificate and for now will only select "Enable HTTP Listener" with Port 80, and uncheck "Enable HTTPS Listener", then click **Save & Continue**.
+`e)` You can now provide an SSL/TLS certificate if you want to. However, for the lab at this point we will skip uploading the certificate and for now will only select "Enable HTTP Listener" with Port 80, and uncheck "Enable HTTPS Listener", then click **Save & Continue**.
 
 .. figure:: _figures/1_5.png
 
-`e)` Accept the defaults for all of the app protect features on the next screen and click **Save & Continue**. In case you need to update this property in the future, you can do so later in the **PROTECT APPLICATION** section.
+`f)` Accept the defaults for all of the app protect features on the next screen and click **Save & Continue**. In case you need to update this property in the future, you can do so later in the **PROTECT APPLICATION** section.
 
 .. figure:: _figures/1_6.png
 
-`f)` Here take note of the **CNAME** value that's generated for your Essential App Protect instance. This value will be used to update our application's DNS record by changing it from an IP address to a CNAME. You should probably copy + paste it to a temporary document, but we'll also retrieve it through the UI and an API call later. Click **Done** and Essential App Protect service will be created and should be ready for use shortly.
+`g)` Here take note of the **CNAME** value that's generated for your Essential App Protect instance. This value will be used to update our application's DNS record by changing it from an IP address to a CNAME. You should probably copy + paste it to a temporary document, but we'll also retrieve it through the UI and an API call later. Click **Done** and Essential App Protect service will be created and should be ready for use shortly.
 
 .. figure:: _figures/1_7.png
 
@@ -230,10 +230,10 @@ Note the info on the IP, City, State, and the Cloud Provider used by our test ap
 
 .. figure:: _figures/0_27.png
 
-3. Add new endpoint
+3. Add New Endpoint
 ************************************************************************
 
-As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and is deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Frankfurt for European users.
+As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Frankfurt for European users.
 
 `a)` Go to the F5 Cloud Services Portal, the **Essential App Protect** service and move on to the **PROTECT APPLICATION** card. There, in the **General** tab, select **Manage regions**.
 
@@ -259,14 +259,40 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 
 .. figure:: _figures/1_14.png
 
-4. Update CNAME
+4. Update DNS Settings Using CNAME
 ************************************************************************
 
-** TODO: replace **
+Now that your Essential App Protect instance is created with two endpoints, we will update the DNS settings of our test app by switching the A-record (that previously pointed to the IP address of the app server) to the newly-created CNAME provided by the EAP setup. This way we will start routing all of the traffic that resolves the app's DNS record to Essential App Protect. Let's do that in the following steps!
+
+a) Let's go to Postman and use the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
 .. figure:: _figures/1_14_1.png
+
+The response will return all information on your instance which we have created via UI:
+
+**TODO screenshot of the response**
+
+The retrieved CNAME will be stored as a variable and will also be used to update the DNS settings:
+
+**TODO screenshot of the response**
+
+More detailed information on this API request can be found `here <https://bit.ly/31XJTuz>`_. 
+
+`b)` Now send the **Update CNAME Record (lab)** request to update our test app's DNS Settings with the generated CNAME, which we captured in the UI earlier, and just now in the previous step using the API request as well:
+
 .. figure:: _figures/1_14_2.png
+
+The response will show the updated type ("CNAME") and value:
+
+**TODO screenshot of the response**
+
+`c)` Test CNAME change via the F5 Cloud Services portal 
+
+Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, select your app from the dropdown menu and click **PROTECT APPLICATION**. Then open the **DNS Settings** tab and click **Test updated DNS**.
+
 .. figure:: _figures/1_14_3.png
+
+You should see "Success" indicating that our DNS updates succeeded!
 
 5. Test geolocation with opera browser
 ************************************************************************
