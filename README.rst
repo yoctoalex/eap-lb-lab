@@ -294,8 +294,20 @@ Return to the F5 Cloud Services portal, open the **Essential App Protect** tab, 
 
 You should see "Success" indicating that our DNS updates succeeded!
 
-5. Test geolocation with opera browser
+5. Test Geolocation with Opera Browser
 ************************************************************************
+
+Now let’s test the geolocation using the Opera browser. As you remember, we've got two endpoints for users in North America and Europe, so we'll test those two locations.
+
+`a)` Open the Opera browser, click **VPN** and select **Americas**. This will simulate your entering BuyTime Website from America. 
+
+
+
+**TBD** !!!!!!!!
+
+Then copy FQDN name (“auction."your zone name"”) in Load balanced record properties and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.
+
+
 
 .. figure:: _figures/1_15.png
 .. figure:: _figures/1_16.png
