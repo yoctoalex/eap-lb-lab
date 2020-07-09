@@ -376,6 +376,8 @@ You can analyze the details of these attacks via the F5 Cloud Services portal in
 Protect One Whole LB Record
 #####################
 
+In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will let the traffic go through the NDS Load Balancer, which in case of one instance failover can redirect users to another available instance. 
+
 The following diagram captures the core components of this chapter:
 
 .. figure:: _figures/chart_3_0.png
@@ -383,12 +385,16 @@ The following diagram captures the core components of this chapter:
 1. Get Zone
 ************************************************************************
 
+To create a DNS Loab Balancer instance, we'll need to get the zone. To do that, send the **Get DNS Zone (lab)** API call. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.
+
 ** TODO: update screenshot **
 
 .. figure:: _figures/3_2.png
 
 2. Create DNS LB App
 ************************************************************************
+
+**TBD**
 
 .. figure:: _figures/3_3.png
 .. figure:: _figures/3_4.png
