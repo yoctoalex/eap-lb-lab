@@ -307,14 +307,38 @@ Now let’s test the geolocation using the Opera browser. As you remember, we've
 
 .. figure:: _figures/1_16.png
 
-6. Execute an Illegal Filetype attack
+6. Execute an Illegal Filetype Attack
 ************************************************************************
 
+At this point all attacks on our app are only monitored but not yet blocked. 
+
+First, let's simulate one of attack types - illegal file type in **Monitoring** mode. This attack combines a valid URL path segment with invalid input to guess or brute-force download of sensitive files or data. More detailed information can be found `here <https://bit.ly/3eaVB7C>`_. And then we can change **Monitoring** to **Blocking** and see how it works.
+
+`a)` In the F5 Cloud Services portal go to **VIEW EVENTS** card which shows different event types for your app. For now, there are no events shown.    
+
 .. figure:: _figures/1_17.png
+
+`b)` Open any browser, paste **FQDN** of your app and add **/nginx.config**:   
+
 .. figure:: _figures/1_18.png
+
+Considering that attacks aren't blocked and only monitored for now, **nginx.config** will be downloaded.  
+
+`c)` Let's got back to the F5 Cloud Services portal and see the **VIEW EVENTS** card. It will show all the information about the attack we did above and indicate its status as **Not blocked**.
+
 .. figure:: _figures/1_19.png
+
+`d)` Now let's change the mode of **High-risk Attack Mitigation** from **Monitoring** to **Blocking** to block all the coming attacks of that type. To do so, go to the **High-risk Attack Mitigation** tab and toggle **Blocking Mode** on. You can notice that **config** file type is checked as disallowed. Click **Update** (and give it a few seconds to update).
+
 .. figure:: _figures/1_20.png
+
+
+`e)` Now we can simulate the same attack again in the browser by pasting **FQDN** of your app and adding **/nginx.config**, and see quite a different result: the attack is not just monitored, but blocked this time!  
+
 .. figure:: _figures/1_21.png
+
+Go back to the F5 Cloud Services portal to the **VIEW EVENTS** card and see the status of the new attack: 
+
 .. figure:: _figures/1_22.png
 
 7. Enable all protection and simulate more attacks
