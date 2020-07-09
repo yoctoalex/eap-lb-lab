@@ -119,7 +119,7 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 **IMPORTANT NOTE**: If any of the subsequent Postman calls return a blank response or **"status": "unauthorized"** response (see the screenshot below), it means that your user token has expired and you simply need to re-login. To do that you just need to re-send the **Login** request using Postman to capture a new token.
 
-.. figure:: _figures/0_11.png TBD
+.. figure:: _figures/0_11.png 
 
 `c)` OPTIONAL (existing F5 cloud service accounts only): **Set User Info (optional)**
 
@@ -233,7 +233,7 @@ Note the info on the IP, City, State, and the Cloud Provider used by our test ap
 3. Add New Endpoint
 ************************************************************************
 
-As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Frankfurt for European users.
+As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Europe for European users.
 
 `a)` Go to the F5 Cloud Services Portal, the **Essential App Protect** service and move on to the **PROTECT APPLICATION** card. There, in the **General** tab, select **Manage regions**.
 
@@ -243,7 +243,7 @@ As you can see, for now we've got only one endpoint located in North America, US
 
 .. figure:: _figures/1_9.png
 
-`c)` Configure the Europe region. First, select **AWS: Europe (Frankfurt) eu-central-1** region from the drop-down menu and then select **IP Address** as endpoint type. Fill in the **IP Address** field with **35.180.122.91** and **Enable HTTP** port, **80**. **Save** the settings.     
+`c)` Configure the Europe region. First, select the region from the drop-down menu and then select **IP Address** as endpoint type. Fill in the **IP Address** field with **35.180.122.91** and **Enable HTTP** port, **80**. **Save** the settings.     
 
 .. figure:: _figures/1_11.png
 
@@ -255,7 +255,7 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 
 .. figure:: _figures/1_13.png
 
-`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, US East (N. Virginia), another in Europe (Frankfurt).
+`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, another in Europe.
 
 .. figure:: _figures/1_14.png
 
@@ -299,17 +299,12 @@ You should see "Success" indicating that our DNS updates succeeded!
 
 Now let’s test the geolocation using the Opera browser. As you remember, we've got two endpoints for users in North America and Europe, so we'll test those two locations.
 
-`a)` Open the Opera browser, click **VPN** and select **Americas**. This will simulate your entering BuyTime Website from America. 
-
-
-
-**TBD** !!!!!!!!
-
-Then copy FQDN name (“auction."your zone name"”) in Load balanced record properties and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.
-
-
+`a)` Open the Opera browser, click **VPN** and first select **Americas**. This will simulate your entering BuyTime Website from America. Then copy FQDN name in Load balanced record properties and paste into the browser. You will get to that IP endpoint which is located in North America, US East (N. Virginia).
 
 .. figure:: _figures/1_15.png
+
+`b)` And now select **Europe** in **VPN** of the Opera browser and **Reload** the page. You will get to the European IP endpoint, which means that European users are directed to that IP Endpoint.
+
 .. figure:: _figures/1_16.png
 
 6. Execute an Illegal Filetype attack
