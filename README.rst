@@ -6,13 +6,9 @@ LAB: F5 Load Balance and Protect Apps
 Pre-Requisites
 ###############
 
-- Any modern browser: for working with the UI (and this document)
+- Any modern browser: for working with the UI (and this lab)
 - Postman: for working with the API of the F5 Cloud Services
 - Opera browser: for simulating geo-location specific traffic
-
-**IMPORTANT NOTE**: If you originally signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account owner), then it is possible that you haven't yet completed a full registration.
-
-You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account & update user info before you can proceed with this lab. You can do so in the step 3(c) below via the F5 Cloud Services API using the Postman request titled **"Set User Info (optional)"**, the details of which are outlined below after the Login.
 
 Lab Environment Overview
 ###############################
@@ -20,7 +16,9 @@ Lab Environment Overview
 1. APIs and Services
 *********************
 
-This Lab utilizes a *Lab Service API*, which was custom-built just for executing this lab:
+The setup & configuration of the services will be done by sending API requests to the following services:
+
+* **F5 Cloud Services API**: create, use, and remove the services in the scope of this lab
 
 * **Lab service API**: facilitates auxiliary functions for the lab only: creating DNS entries, sending targeted requests & traffic to the apps/services, etc.
 
@@ -42,7 +40,7 @@ Once you've logged in with an account, you will be using the user name and passw
 
 In order to access specific F5 Cloud Services, you need to subscribe to the corresponding service catalogs. The focus of this lab is on F5 Essential App Protect and DNS Load Balancer services, so you will need to subscribe to them. At the time of the writing of this lab you can take advantage of a 15-day free trial offer to work with F5 Essential App Protect service -- no payment method required!
 
-   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **DNS Load Balancer** and **Essential App Protect services**.
+   `1.` Click on the **Your F5 Cloud** tab in the left navigation panel and you will see the available service catalogs, as well as services you have subscribed to, if any. For this lab you will need to subscribe to **DNS Load Balancer** and **Essential App Protect** services.
 
    .. figure:: _figures/0_2.png
 
@@ -64,16 +62,19 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in.
 
-`b)` Import collection and environment JSON files from the `Git repo for this lab <https://bit.ly/3eb8yhN>`_: 
+`b)` Import collection and environment JSON files from the `Git repo for this lab <https://bit.ly/3eb8yhN>`_ :
 
+First, select the Collection JSON file. (NOTE: import of one file at a time seems to avoid some reported issues with Postman).
 - collection: https://bit.ly/2ZavYj2
-- environment: https://bit.ly/3ffTcd2
 
 .. figure:: _figures/0_23.png
 
 .. figure:: _figures/0_24.png
 
-Repeat the steps above for the environment JSON file. You will now see the imported collection (left side) with calls in several categories, as well as environment variables (top right) used to store and pass data between Postman and the API.
+Repeat the steps above for the environment JSON file. 
+- environment: https://bit.ly/3ffTcd2
+
+You will now see the imported collection (left side) with calls in several categories, as well as environment variables (top right) used to store and pass data between Postman and the API.
 
 .. figure:: _figures/0_7.png
 
@@ -88,18 +89,18 @@ Open the Opera browser, click **Settings, Advanced, Features** and then **Enable
 
 .. figure:: _figures/0_25.png
 
-Protect Essential App Protect Multiple Endpoints
+F5 Essential App Protect with Multiple Endpoints
 #####################
 
-The following diagram captures the core components of this chapter:
+The following diagram captures the deployment topology of this section:
 
  .. figure:: _figures/chart_1_0.png
 
 
-1. Get Fully Qualified Domain Name (FQDN)
+1. Get a Custom FQDN (Fully Qualified Domain Name)
 ************************************************************************
 
-To protect mulpitple endpoints (North America and Europe), we, first of all, will need to create the Essential App Protect instance in the F5 Cloud Services portal using FQDN. Use Postman and follow the steps below to get FQDN from the Lab service API.
+To protect mulpitple endpoints (North America and Europe), we will first need to create the Essential App Protect instance in the F5 Cloud Services portal. This lab contains a unique Lab Service API that generates a custom FQDN for each user of the lab. Use Postman and follow the steps below to get a personalized FQDN:
 
 `a)` Open the “F5 Load Balance and Protect Apps” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values). Do the same for the “USER_PASSWORD”.
 
@@ -121,25 +122,9 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/0_11.png 
 
-`c)` OPTIONAL (existing F5 cloud service accounts only): **Set User Info (optional)**
-
-**IMPORTANT NOTE**: You can skip this step and proceed to step (d) if you have just created a brand new account.
-
-   However, if you were previously signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account    owner), then it is possible that you haven't yet completed a full registration. You can quickly tell if you have by looking at your account(s) in the F5 Cloud Services Portal If you do not see any "Accounts you own:" and only see "Accounts you've been granted access to" as a "Limited User", then you need to create a full account & update user info before you can proceed with this lab.
-   
-You can do this by running the following **Set User Info (optional)** API call, after you've updated the Body of the request with your own organization & address information:
-
-.. figure:: _figures/0_12.png
-
-The response returns the following detail, including your own organization account ID (id):
-
-.. figure:: _figures/0_13.jpg
-
-More information on this API request can be found `here <https://bit.ly/2Z9mswr>`_. 
-
 At this point you should be a full user with an "Owned Account" and a primary organization account id, which can also be confirmed in the F5 Cloud Services Portal in the drop-down under your user name (top right), where you should see "Accounts you own:" and the Organization Account you created with **"Owner"** defined.
 
-`d)` Retrieve User ID & Account ID
+`c)` Retrieve User ID & Account ID
 
 Select the **Get Current User** request and click **Send** to retrieve User ID and Account ID to be used in the further requests.
 
@@ -155,7 +140,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <https://bit.ly/38DsMj5>`_. 
 
-`e)` Retrieve information on available catalogs and their IDs
+`d)` Retrieve information on available catalogs and their IDs
 
 Select the **Get Catalogs** request and click **Send** to retrieve the data about the available Catalogs and their IDs.
 
@@ -171,7 +156,7 @@ The retrieved IDs are then stored for subsequent calls using a function inside P
 
 More detailed information on this API call can be found `here <https://bit.ly/3iJhTR5>`_. 
 
-`f)` Let’s now retrieve FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal. The request is as follows:
+`e)` Now let's retrieve your custom FQDN with the **Get FQDN Record type (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to get a record that will be used to create F5 Essential App Protect instance in the F5 Cloud Services portal. The request is as follows:
 
 .. figure:: _figures/0_20.png
 
@@ -187,22 +172,20 @@ When this request completes successfully the value of the FQDN Record will be ca
 
 **IMPORTANT NOTE**: Make note of this FQDN record; we will use it many times throughout the lab, and for creating the Essential App Protect service in the F5 Cloud Services portal, as well as throughout the lab as the domain name for your test application.
 
-2. Create Essential App Protect Application
+2. Create Essential App Protect Instance
 ************************************************************************
 
-`a)` In order to create the Essential App Protect service, we need the FQDN Record info from a previously run API call. You can retrieve it by opening the **Get FQDN Record type (lab)** request in Postman and copying the value of the "record" key in the response.
+Now that you have a customer FQDN record value, you use it as your own "test application" to protect. Let's set up Essential App Protect now:
 
-.. figure:: _figures/1_2.png
-
-`b)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**.
+`a)` Go to the F5 Cloud Services portal, open the **Essential App Protect** tab and click **Start protecting your app**.
 
 .. figure:: _figures/1_3.png
 
-`c)` Paste the record name you copied in step 2.a) above into **"Fully Qualified Domain Name (FQDN)"** field. The **"Name this application"** field will auto-populate; keep this value as-is for simplicity. The **"Add a description"** field is optional. Click **Save & Continue**.
+`b)` Paste the FQDN record name you copied in the previous section into **"Fully Qualified Domain Name (FQDN)"** field. The **"Name this application"** field will auto-populate; keep this value as-is for simplicity. The **"Add a description"** field is optional. Click **Save & Continue**.
 
 .. figure:: _figures/1_3_1.png
 
-`d)` Essential App Protect does an FQDN lookup to retrieve the corresponding IP of the FQDN record, and will gather info on the location and geo-proximity of the nearest cloud region, and will display these as recommendations as to where to deploy the EAP instance.
+`c)` Essential App Protect does an FQDN lookup to retrieve the corresponding IP of the FQDN record, and will gather info on the location and geo-proximity of the nearest cloud region, and will display these as recommendations for where to deploy the EAP instance.
 
 At this point, some users may want to select a different value in the drop-down for the EAP Region, which you can update/change at any time in the EAP instance settings after the instance setup.
 
@@ -214,15 +197,15 @@ Click **Save & Continue**.
 
 Note the info on the IP, City, State, and the Cloud Provider used by our test application. It also shows the region used by the cloud provider derived from the FQDN/IP information. As you can see in the screenshot, the example test app endpoint is located in North America, US East (N. Virginia) and is deployed on Amazon AWS. Note that the default configuration will be to route the traffic that's hitting the EAP instance to the identified IP address of the application endpoint.
 
-`e)` You can now provide an SSL/TLS certificate if you want to. However, for the lab at this point we will skip uploading the certificate and for now will only select "Enable HTTP Listener" with Port 80, and uncheck "Enable HTTPS Listener", then click **Save & Continue**.
+`d)` You can now provide an SSL/TLS certificate if you want to. However, for the lab at this point we will skip uploading the certificate and for now will only select "Enable HTTP Listener" with Port 80, and uncheck "Enable HTTPS Listener", then click **Save & Continue**.
 
 .. figure:: _figures/1_5.png
 
-`f)` Accept the defaults for all of the app protect features on the next screen and click **Save & Continue**. In case you need to update this property in the future, you can do so later in the **PROTECT APPLICATION** section.
+`e)` Accept the defaults for all of the app protect features on the next screen and click **Save & Continue**. In case you need to update this property in the future, you can do so later in the **PROTECT APPLICATION** section.
 
 .. figure:: _figures/1_6.png
 
-`g)` Here take note of the **CNAME** value that's generated for your Essential App Protect instance. This value will be used to update our application's DNS record by changing it from an IP address to a CNAME. You should probably copy + paste it to a temporary document, but we'll also retrieve it through the UI and an API call later. Click **Done** and Essential App Protect service will be created and should be ready for use shortly.
+`f)` Here take note of the **CNAME** value that's generated for your Essential App Protect instance. This value will be used to update our application's DNS record by changing it from an IP address to a CNAME. You should probably copy + paste it to a temporary document, but we'll also retrieve it through the UI and an API call later. Click **Done** and Essential App Protect service will be created and should be ready for use shortly.
 
 .. figure:: _figures/1_7.png
 
@@ -230,16 +213,16 @@ Note the info on the IP, City, State, and the Cloud Provider used by our test ap
 
 .. figure:: _figures/0_27.png
 
-3. Add New Endpoint
+3. Add and Additional Endpoint
 ************************************************************************
 
-As you can see, for now we've got only one endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Europe for European users.
+In the previous step we configured protection for just one application endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Europe for European users.
 
 `a)` Go to the F5 Cloud Services Portal, the **Essential App Protect** service and move on to the **PROTECT APPLICATION** card. There, in the **General** tab, select **Manage regions**.
 
 .. figure:: _figures/1_8.png
 
-`b)` Hit **Add**: 
+`b)` Hit **Add** to add another region: 
 
 .. figure:: _figures/1_9.png
 
@@ -247,7 +230,7 @@ As you can see, for now we've got only one endpoint located in North America, US
 
 .. figure:: _figures/1_11.png
 
-As a result, we'll see both of your app's endpoints:
+As a result, wnow you should see both endpoints for your application:
 
 .. figure:: _figures/1_12.png
 
@@ -255,7 +238,7 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 
 .. figure:: _figures/1_13.png
 
-`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, another in Europe.
+`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, the other one in Europe.
 
 .. figure:: _figures/1_14.png
 
@@ -297,9 +280,9 @@ You should see "Success" indicating that our DNS updates succeeded!
 5. Test Geolocation with Opera Browser
 ************************************************************************
 
-Now let’s test the geolocation using the Opera browser. As you remember, we've got two endpoints for users in North America and Europe, so we'll test those two locations.
+Now let’s test the protected app, as well as the multi-region support using the Opera browser. As you remember, we now have two endpoints for users in North America and Europe, so we'll test those two locations. Keep in mind that Eseential App Protect uses performance-based routing to determine the closest endpoint to drive the users to. This means for true geo-proximity based routing it's best to use a service like the `F5 DNS Load Balancing <https://github.com/f5devcentral/f5-cloudservicednslab>`_.
 
-`a)` Open the Opera browser, click **VPN** and first select **Americas**. This will simulate your entering BuyTime Website from America. Then copy FQDN name in Load balanced record properties and paste into the browser. You will get to that IP endpoint which is located in North America, US East (N. Virginia).
+`a)` Open the Opera browser, click **VPN** and first select **Americas**. This will simulate your entering the test app (BuyTime Auction) from the America region. Then copy FQDN name in Load balanced record properties and paste into the browser. You will get to that IP endpoint which is located in North America, US East (N. Virginia).
 
 .. figure:: _figures/1_15.png
 
