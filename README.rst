@@ -349,9 +349,9 @@ Add Protection to a Load-Balanced Record
 
 F5 Essential App Protect can work together with the F5 DNS Load Balancer in order to protect a load-balanced record. As opposed to the previous scenario, where Essential App Protect used multiple app end-points in different regions for **performance based load-balancing**, the DNS Load Balancer can be used to create advanced geo-proximity load balancing with load-balanced pools and granular controls over regions, countries, and states. 
 
-In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will create a configuration where the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose. 
+In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will create a configuration where the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically-distinct load-balancer pool created for this region. 
 
-The following diagram captures the core components of this chapter:
+The following diagram captures the core components of this section:
 
 .. figure:: _figures/chart_3_0.png
 
@@ -364,39 +364,39 @@ To create a DNS Load Balancer instance, we'll need to get the zone. To do that, 
 
 .. figure:: _figures/3_2.png
 
-**Note** that you need to copy the **zone** name generated in the call's response to be used in the next step to create a DNS Load Balancer instance.
+**Note** that you need to copy the **zone** name generated in the API response to be used in the next step to create a DNS Load Balancer instance.
 
 2. Create F5 DNS Load Balancer Cloud Service
 ************************************************************************
 
-Let’s now create DNS Load Balancer Service to be able to balance loads across the pools we'll add a few steps later and provide global availability and performance with health-check and built-in DDoS protection.
+Let’s now create the DNS Load Balancer Service to provide global availability and performance with health-check and built-in DDoS protection.
 
 `a)` Go to the F5 Cloud Services portal and open the **DNS Load Balancer** tab. Click **Create**.
 
 .. figure:: _figures/3_3.png
 
-`b)` Paste name of the zone we copied in step 1. above and click **Create**.
+`b)` Paste the name of the zone we copied in step 1. above and click **Create**.
 
 .. figure:: _figures/3_4.png
 
-Your DNS Load Balancer instance will appear on the list but in Inactive status. You can change the status after creating load balanced record and pool.
+Your DNS Load Balancer instance will appear on the list but in Inactive status. You can change the status after creating a load balanced record and pool.
 
 .. figure:: _figures/3_5.png
 
 3. Add Load Balanced Record Endpoints with Health Check
 ************************************************************************
 
-To distribute the load, DNS Load Balancer will need to monitor health of each IP Endpoint. So, let’s first create a monitor.
+To distribute the load, DNS Load Balancer will need to monitor the health of each IP Endpoint. So, let’s first create a monitor.
 
 `a)` Click on the created DNS Load Balancer instance and go to the **Monitors** tab. Then click **Create**.
 
 .. figure:: _figures/3_6.png
 
-`b)` Fill in monitor's name, choose "HTTP Standard" protocol, indicate "80" port and click **Save**.
+`b)` Fill in monitor name, choose "HTTP Standard" protocol, indicate "80" port and click **Save**.
 
 .. figure:: _figures/3_7.png
 
-`c)` Your monitor is created. Now let's add two IP endpoints with health check for balancing the traffic. DNS Load Balancer chooses an IP endpoint based on request origin and configuration of IP endpoints, as well as IP Endpoint health. So, go to the **IP endpoints** tab and then click **Create**.
+`c)` Your monitor is created. Now let's add two IP endpoints with health check for balancing the traffic. DNS Load Balancer chooses an IP endpoint based on the request origin and configuration of IP endpoints, as well as IP Endpoint health. So, go to the **IP endpoints** tab and then click **Create**.
 
 .. figure:: _figures/3_8.png
 
@@ -443,18 +443,18 @@ And then select the second endpoint we’ve just created, as well as the monitor
 
 A newly created pool with the two endpoints will appear on the list.
 
-5. Configure Load Balanced Record
+5. Configure the Load Balanced Record
 ************************************************************************
 
-After creating all the required components (IP endpoints, Pool and Monitor), we can create a DNS Load Balancer record with its proximity rule, which will be used to create advanced geo-proximity load and will be protected by F5 Essential App Protect.
+After creating all of the required DNS Load Balancing elements (IP endpoints, Pool and Monitor), we can create a DNS Load Balancer record with its proximity rule, which will be used to create advanced geo-proximity based routing and will be protected by the F5 Essential App Protect.
 
 `a)` Go to the **Load balanced records** tab and then click **Create**.
 
 .. figure:: _figures/3_19.png
 
-`b)` First, fill in LBR name as "auction", host as "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "auction-pool" pool) to direct requests from anywhere to the pool we created earlier with two added endpoints. Set score of the proximity rule to be "1". This will define the priority of the rule in case if some more are added.
+`b)` First, fill in LBR name as "auction", host as "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "auction-pool" pool) to direct requests from anywhere to the pool with two endpoints that we created earlier. Set score of the proximity rule to be "1". This will define the priority of the rule in case if some more are added.
 
-Click **Add Rule**, then check **Enabled** tick and **Save** the record.
+Click **Add Rule**, then check **Enabled**  and **Save** the record.
 
 .. figure:: _figures/3_20.png
 
@@ -464,10 +464,10 @@ Click **Add Rule**, then check **Enabled** tick and **Save** the record.
 
 The DNS Load Balancer service is now setup.
 
-6. Update Essential App Protect Instance
+6. Update the Essential App Protect Instance
 ************************************************************************
 
-For this section we will need to set up DNS Load Balancer for the Essential App Protect instead of multiple app endpoints in different regions. To do so, follow a few steps below. 
+For this section we will use the F5 DNS Load Balancer for the Essential App Protect instead of multiple app endpoints in different regions. We will first add the Load Balanced record as the new endpoint to be protected, follow a few steps below. 
 
 `a)` In the F5 Cloud Services portal go to the **Essential App Protect** tab, in the drop-down menu select the app you created in the first section, then proceed to the **PROTECT APPLICATION** card and go to the **General** tab. In the **DEPLOYED REGIONS** section, you can see those two endpoints which we added in the first section. Now let's click **Manage regions** and change the settings.  
 
@@ -477,13 +477,13 @@ For this section we will need to set up DNS Load Balancer for the Essential App 
 
 .. figure:: _figures/3_41.png
 
-`c)` Select **AWS: US East (Ohio) us-east-2** as a new region and **DNS Name** as endpoint type. Then **Enable HTTP** with port **80** and click **Save**. 
+`c)` Select **AWS: US East (Ohio) us-east-2** as a new region and **DNS Name** as the endpoint type. Then **Enable HTTP** with port **80** and click **Save**. 
 
 .. figure:: _figures/3_42.png
 
 The new region will appear on the list of your available regions. 
 
-`d)` Now let's delete two regions which we added in the first section. Check both of them and click **Delete**.
+`d)` Now let's delete the two regions which we added in the first section. Check both of them and click **Delete**.
 
 .. figure:: _figures/3_43.png
 
@@ -493,22 +493,22 @@ Only the newly created region will remain on the list.
 
 .. figure:: _figures/3_44.png
 
-Now you'll get back to the **General** settings of your Essential App Protect instance and see the updated **DEPLOYED REGIONS** section.
+Finally, you'll get back to the **General** settings of your Essential App Protect instance and see the updated **DEPLOYED REGIONS** section.
 
 .. figure:: _figures/3_45.png
 
-From now on, DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose.
+Now, the Essential App Protect service will now protect the Load Balanced record and in turn the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose.
 
 7. Simulate SQL Injection Attack
 ************************************************************************
 
 SQL Injection attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found `here <https://bit.ly/2ZUv0Xl>`_.  
 
-Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. In the **LOG IN** window fill in username as **' OR 1=1 --'** and password as **any value**. Click **LOGIN**. 
+Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. In the **LOG IN** window fill in username value as follows (including singls quotes) **' OR 1=1 --'** and use any password as the value. Click **LOGIN**. 
 
 .. figure:: _figures/3_46.png
 
-And you will see that SQL Injection attack is blocked.
+In the Essential App Protect events you we can see that our SQL Injection attack is blocked.
 
 .. figure:: _figures/3_47.png
 
@@ -547,3 +547,5 @@ We recommend that you clear your tokens from the Lab Service API for security pu
 .. figure:: _figures/4_5.png
 
 More detailed information on these API requests can be found `here <https://bit.ly/3fsxceU>`_.
+
+We hope you've enjoyed this lab! Sign up for any of the F5 Cloud Services for the full experience!
