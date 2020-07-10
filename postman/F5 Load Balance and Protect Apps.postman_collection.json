@@ -59,57 +59,6 @@
 					"response": []
 				},
 				{
-					"name": "Set User Info (optional)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "f264e78a-3b1f-4450-9668-37b6fbd49a28",
-								"exec": [
-									"pm.test(\"Set account_id variable\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.environment.set(\"ACCOUNT_ID\", jsonData.id);",
-									"})",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{ACCESS_TOKEN}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Demo Account\",\n\t\"address\": {\n\t\t\"street_1\": \"801 5th Ave\",\n\t\t\"city\": \"Seattle\",\n\t\t\"state\": \"WA\",\n\t\t\"postal_code\": \"98104\",\n    \t\"country\": \"US\"\n    }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/accounts",
-							"protocol": "https",
-							"host": [
-								"{{HOSTNAME}}"
-							],
-							"path": [
-								"{{API_VERSION}}",
-								"svc-account",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get Current User",
 					"event": [
 						{
@@ -326,7 +275,7 @@
 					"response": []
 				},
 				{
-					"name": "Update CNAME Record (lab) Copy",
+					"name": "Update CNAME Record (lab)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -361,7 +310,7 @@
 					"response": []
 				},
 				{
-					"name": "Start EAP Attack (lab) Copy",
+					"name": "Start EAP Attack (lab)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -460,7 +409,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{LIMITED_ACCESS_TOKEN}}"
+								"value": "Bearer {{ACCESS_TOKEN}}"
 							}
 						],
 						"url": {
@@ -486,7 +435,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{LIMITED_ACCESS_TOKEN}}"
+								"value": "Bearer {{ACCESS_TOKEN}}"
 							}
 						],
 						"url": {
