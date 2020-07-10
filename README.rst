@@ -376,42 +376,93 @@ To create a DNS Loab Balancer instance, we'll need to get the zone. To do that, 
 
 .. figure:: _figures/3_2.png
 
-2. Create DNS LB App
+**Note** that you need to copy + paste the **zone** name generated in the call's response to be used in the next step to create a DNS Load Balancer instance.
+
+2. Create F5 DNS Load Balancer Cloud Service
 ************************************************************************
 
-**TBD**
+Let’s now create DNS Load Balancer Service to be able to balance loads across the pools we'll add a few steps later and provide global availability and performance with health-check and built-in DDoS protection.
+
+`a)` Go to the F5 Cloud Services portal and open the **DNS Load Balancer** tab. Click **Create**.
 
 .. figure:: _figures/3_3.png
+
+`b)` Paste name of the zone we copied in step 1. above and click **Create**.
+
 .. figure:: _figures/3_4.png
+
+Your DNS Load Balancer instance will appear on the list but in Inactive status. You can change the status after creating load balanced record and pool.
+
 .. figure:: _figures/3_5.png
 
-4. Add LB endpoints
+3. Add Load Balanced Record Endpoints with Health Check
 ************************************************************************
+
+To distribute the load, DNS Load Balancer will need to monitor health of each IP Endpoint. So, let’s first create a monitor.
+
+`a)` Click on the created DNS Load Balancer instance and go to the **Monitors** tab. Then click **Create**.
 
 .. figure:: _figures/3_6.png
+
+`b)` Fill in monitor's name, choose "HTTP Standard" protocol, indicate "80" port and click **Save**.
+
 .. figure:: _figures/3_7.png
+
+`c)` Your monitor is created. Now let's add two IP endpoints with health check for balancing the traffic. DNS Load Balancer chooses an IP endpoint based on request origin and configuration of IP endpoints, as well as IP Endpoint health. So, go to the **IP endpoints** tab and then click **Create**.
+
 .. figure:: _figures/3_8.png
+
+`d)` Fill in name ("na1-auction"), IP address ("34.229.48.248"), port ("80") and select the monitor we created above. **Save** the first IP endpoint. 
+
 .. figure:: _figures/3_9.png
+
+The first **na1-auction** IP endpoint will appear on the list. 
+
+`e)` Let's add the second IP endpoint by clicking **Create** once again on the **IP endpoints** tab. Then fill in name ("na2-auction"), IP address ("18.232.64.254"), port ("80") and select the monitor we created above. **Save** the second IP endpoint.  
+
 .. figure:: _figures/3_10.png
 
-5. Configure LB Pool
+Now you can see two IP endpoints you've just created!
+
+4. Configure Load Balanced Record Pool
 ************************************************************************
 
+Now let's create a pool with two IP endpoint members in it. 
+
+`a)` In the F5 Cloud Services portal go to the **Pools** tab and then click **Create**.
+
 .. figure:: _figures/3_12.png
+
+`b)` Fill in its name ("auction-pool"), choose "A" record type and "round-robin" method. Then click **Next**.
+
 .. figure:: _figures/3_13.png
+
+`c)` Let's add the IP endpoints we created in step 3 above to our pool. Click **Add Member**.
+
 .. figure:: _figures/3_14.png
+
+`d)` First select the first endpoint we’ve just created, as well as the monitor, and click **Add**. 
+
 .. figure:: _figures/3_15.png
+
+And then select the second endpoint we’ve just created, as well as the monitor, and click **Add**.  
+
 .. figure:: _figures/3_16.png
+
+`e)` After you see both pool members added to the pool, click **Create**. 
+
 .. figure:: _figures/3_18.png
 
-6. Configure Load Balanced Records
+A newly created pool with the two endpoints will appear on the list.
+
+5. Configure Load Balanced Records
 ************************************************************************
 
 .. figure:: _figures/3_19.png
 .. figure:: _figures/3_20.png
 .. figure:: _figures/3_21.png
 
-7. Update EAP App
+6. Update EAP App
 ************************************************************************
 
 .. figure:: _figures/3_40.png
@@ -421,7 +472,7 @@ To create a DNS Loab Balancer instance, we'll need to get the zone. To do that, 
 .. figure:: _figures/3_44.png
 .. figure:: _figures/3_45.png
 
-8. Simulate SQL injection attack
+7. Simulate SQL injection attack
 ************************************************************************
 
 Open link in the browser and click login
