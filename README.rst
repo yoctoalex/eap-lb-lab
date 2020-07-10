@@ -1,5 +1,5 @@
-LAB: F5 Load Balance and Protect Apps
-===========================================
+LAB: Load Balance and Protect Applications with F5 DNS Load Balancer and Essential App Protect
+==================================================
 
 .. contents:: Table of Contents
 
