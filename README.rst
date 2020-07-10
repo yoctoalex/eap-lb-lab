@@ -1,5 +1,5 @@
-LAB: F5 Load Balance and Protect Apps
-===========================================
+LAB: Load Balance and Protect Applications with F5 DNS Load Balancer and Essential App Protect
+==================================================
 
 .. contents:: Table of Contents
 
@@ -64,15 +64,13 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
 `b)` Import collection and environment JSON files from the `Git repo for this lab <https://bit.ly/3eb8yhN>`_ :
 
-First, select the Collection JSON file. (NOTE: import of one file at a time seems to avoid some reported issues with Postman).
-- collection: https://bit.ly/2ZavYj2
+First, select the Collection JSON file. (NOTE: import of one file at a time seems to avoid some reported issues with Postman). Collection: https://bit.ly/2ZavYj2
 
 .. figure:: _figures/0_23.png
 
 .. figure:: _figures/0_24.png
 
-Repeat the steps above for the environment JSON file. 
-- environment: https://bit.ly/3ffTcd2
+Repeat the steps above for the environment JSON file. Environment: https://bit.ly/3ffTcd2
 
 You will now see the imported collection (left side) with calls in several categories, as well as environment variables (top right) used to store and pass data between Postman and the API.
 
@@ -100,7 +98,7 @@ The following diagram captures the deployment topology of this section:
 1. Get a Custom FQDN (Fully Qualified Domain Name)
 ************************************************************************
 
-To protect mulpitple endpoints (North America and Europe), we will first need to create the Essential App Protect instance in the F5 Cloud Services portal. This lab contains a unique Lab Service API that generates a custom FQDN for each user of the lab. Use Postman and follow the steps below to get a personalized FQDN:
+To protect multiple endpoints (North America and Europe), we will first need to create the Essential App Protect instance in the F5 Cloud Services portal. This lab contains a unique Lab Service API that generates a custom FQDN for each user of the lab. Use Postman and follow the steps below to get a personalized FQDN:
 
 `a)` Open the “F5 Load Balance and Protect Apps” environment variables by clicking the “Environment Quick Look”, click into the field of the corresponding variable, and type the value of user email in the variable “USER_EMAIL” (click **Enter** after typing the values). Do the same for the “USER_PASSWORD”.
 
@@ -213,10 +211,10 @@ Note the info on the IP, City, State, and the Cloud Provider used by our test ap
 
 .. figure:: _figures/0_27.png
 
-3. Add and Additional Endpoint
+3. Add an Additional Endpoint
 ************************************************************************
 
-In the previous step we configured protection for just one application endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our applicatoin is serving a global audience, so let's add the second endpoint located in Europe for European users.
+In the previous step we configured protection for just one application endpoint located in North America, US East (N. Virginia) and deployed on Amazon AWS. But our application is serving a global audience, so let's add the second endpoint located in Europe for European users.
 
 `a)` Go to the F5 Cloud Services Portal, the **Essential App Protect** service and move on to the **PROTECT APPLICATION** card. There, in the **General** tab, select **Manage regions**.
 
@@ -230,7 +228,7 @@ In the previous step we configured protection for just one application endpoint 
 
 .. figure:: _figures/1_11.png
 
-As a result, wnow you should see both endpoints for your application:
+As a result, now you should see both endpoints for your application:
 
 .. figure:: _figures/1_12.png
 
@@ -238,7 +236,7 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 
 .. figure:: _figures/1_13.png
 
-`d)` Now let's see our app's enpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, the other one in Europe.
+`d)` Now let's see our app's endpoints on the map. Go to the **MONITOR APPLICATION** card where you can see that both endpoints are shown on the map - one in North America, the other one in Europe.
 
 .. figure:: _figures/1_14.png
 
@@ -247,27 +245,17 @@ IP Endpoints will also be updated in the **General** tab of the **PROTECT APPLIC
 
 Now that your Essential App Protect instance is created with two endpoints, we will update the DNS settings of our test app by switching the A-record (that previously pointed to the IP address of the app server) to the newly-created CNAME provided by the EAP setup. This way we will start routing all of the traffic that resolves the app's DNS record to Essential App Protect. Let's do that in the following steps!
 
-a) Let's go to Postman and use the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
+`a)` Let's go to Postman and use the **Get EAP Subscription** request to get the "subscription_id" and "CNAME" using your "ACCESS_TOKEN".
 
 .. figure:: _figures/1_14_1.png
 
-The response will return all information on your instance which we have created via UI:
-
-**TODO screenshot of the response**
-
-The retrieved CNAME will be stored as a variable and will also be used to update the DNS settings:
-
-**TODO screenshot of the response**
-
-More detailed information on this API request can be found `here <https://bit.ly/31XJTuz>`_. 
+The response will return all information on your instance which we have created via UI. More detailed information on this API request can be found `here <https://bit.ly/31XJTuz>`_. 
 
 `b)` Now send the **Update CNAME Record (lab)** request to update our test app's DNS Settings with the generated CNAME, which we captured in the UI earlier, and just now in the previous step using the API request as well:
 
 .. figure:: _figures/1_14_2.png
 
-The response will show the updated type ("CNAME") and value:
-
-**TODO screenshot of the response**
+The response will show the updated type ("CNAME") and value.
 
 `c)` Test CNAME change via the F5 Cloud Services portal 
 
@@ -280,7 +268,7 @@ You should see "Success" indicating that our DNS updates succeeded!
 5. Test Geolocation with Opera Browser
 ************************************************************************
 
-Now let’s test the protected app, as well as the multi-region support using the Opera browser. As you remember, we now have two endpoints for users in North America and Europe, so we'll test those two locations. Keep in mind that Eseential App Protect uses performance-based routing to determine the closest endpoint to drive the users to. This means for true geo-proximity based routing it's best to use a service like the `F5 DNS Load Balancing <https://github.com/f5devcentral/f5-cloudservicednslab>`_.
+Now let’s test the protected app, as well as the multi-region support using the Opera browser. As you remember, we now have two endpoints for users in North America and Europe, so we'll test those two locations. Keep in mind that Essential App Protect uses performance-based routing to determine the closest endpoint to drive the users to. This means for true geo-proximity based routing it's best to use a service like the `F5 DNS Load Balancing <https://github.com/f5devcentral/f5-cloudservicednslab>`_.
 
 `a)` Open the Opera browser, click **VPN** and first select **Americas**. This will simulate your entering the test app (BuyTime Auction) from the America region. Then copy FQDN name in Load balanced record properties and paste into the browser. You will get to that IP endpoint which is located in North America, US East (N. Virginia).
 
@@ -337,7 +325,7 @@ For now only **High-risk Attack Mitigation** attack types are configured to be i
 
 .. figure:: _figures/1_25.png
 
-`c)` Now that the protection mode is "blocking" for all attack types, you can simulate more attacks and see them blocked. So, let's return to Postman and use our Lab service API to simulate a flood of attacks by sending the **Start EAP Attack (lab) Copy** request.
+`c)` Now that the protection mode is "blocking" for all attack types, you can simulate more attacks and see them blocked. So, let's return to Postman and use our Lab service API to simulate a flood of attacks by sending the **Start EAP Attack (lab)** request.
 
 .. figure:: _figures/1_26.png
 
@@ -359,56 +347,56 @@ You can analyze the details of these attacks via the F5 Cloud Services portal in
 Add Protection to a Load-Balanced Record
 ########################################
 
-F5 Essential App Protect can work together with the F5 DNS Load Balancer in order to a protect a load-balanced record. As opposed to the previous scenario, where Essential App Protect used multiple app end-points in different regions for **performance based load-balancing**, the DNS Load Balancer can be used to create advanced geo-proximity load balancing with load-balanced pools and granular controls over regions, countries, and states. 
+F5 Essential App Protect can work together with the F5 DNS Load Balancer in order to protect a load-balanced record. As opposed to the previous scenario, where Essential App Protect used multiple app end-points in different regions for **performance based load-balancing**, the DNS Load Balancer can be used to create advanced geo-proximity load balancing with load-balanced pools and granular controls over regions, countries, and states. 
 
-In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will create a configuration where the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose. 
+In this section we will use the F5 Cloud Services UI to set up the Load Balancer DNS record, add endpoints for our Auction app, add health checks, load balanced pools, and run through a few configuration options. This will create a configuration where the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically-distinct load-balancer pool created for this region. 
 
-The following diagram captures the core components of this chapter:
+The following diagram captures the core components of this section:
 
 .. figure:: _figures/chart_3_0.png
 
 1. Get Zone
 ************************************************************************
 
-To create a DNS Loab Balancer instance, we'll need to get the zone. To do that, send the **Get DNS Zone (lab)** API call. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.
+To create a DNS Load Balancer instance, we'll need to get the zone. To do that, send the **Get DNS Zone (lab)** API call. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.
 
 **TODO: update screenshot**
 
 .. figure:: _figures/3_2.png
 
-**Note** that you need to copy + paste the **zone** name generated in the call's response to be used in the next step to create a DNS Load Balancer instance.
+**Note** that you need to copy the **zone** name generated in the API response to be used in the next step to create a DNS Load Balancer instance.
 
 2. Create F5 DNS Load Balancer Cloud Service
 ************************************************************************
 
-Let’s now create DNS Load Balancer Service to be able to balance loads across the pools we'll add a few steps later and provide global availability and performance with health-check and built-in DDoS protection.
+Let’s now create the DNS Load Balancer Service to provide global availability and performance with health-check and built-in DDoS protection.
 
 `a)` Go to the F5 Cloud Services portal and open the **DNS Load Balancer** tab. Click **Create**.
 
 .. figure:: _figures/3_3.png
 
-`b)` Paste name of the zone we copied in step 1. above and click **Create**.
+`b)` Paste the name of the zone we copied in step 1. above and click **Create**.
 
 .. figure:: _figures/3_4.png
 
-Your DNS Load Balancer instance will appear on the list but in Inactive status. You can change the status after creating load balanced record and pool.
+Your DNS Load Balancer instance will appear on the list but in Inactive status. You can change the status after creating a load balanced record and pool.
 
 .. figure:: _figures/3_5.png
 
 3. Add Load Balanced Record Endpoints with Health Check
 ************************************************************************
 
-To distribute the load, DNS Load Balancer will need to monitor health of each IP Endpoint. So, let’s first create a monitor.
+To distribute the load, DNS Load Balancer will need to monitor the health of each IP Endpoint. So, let’s first create a monitor.
 
 `a)` Click on the created DNS Load Balancer instance and go to the **Monitors** tab. Then click **Create**.
 
 .. figure:: _figures/3_6.png
 
-`b)` Fill in monitor's name, choose "HTTP Standard" protocol, indicate "80" port and click **Save**.
+`b)` Fill in monitor name, choose "HTTP Standard" protocol, indicate "80" port and click **Save**.
 
 .. figure:: _figures/3_7.png
 
-`c)` Your monitor is created. Now let's add two IP endpoints with health check for balancing the traffic. DNS Load Balancer chooses an IP endpoint based on request origin and configuration of IP endpoints, as well as IP Endpoint health. So, go to the **IP endpoints** tab and then click **Create**.
+`c)` Your monitor is created. Now let's add two IP endpoints with health check for balancing the traffic. DNS Load Balancer chooses an IP endpoint based on the request origin and configuration of IP endpoints, as well as IP Endpoint health. So, go to the **IP endpoints** tab and then click **Create**.
 
 .. figure:: _figures/3_8.png
 
@@ -437,7 +425,7 @@ Now let's create a pool with two IP endpoint members in it.
 
 .. figure:: _figures/3_13.png
 
-`c)` Let's add the IP endpoints we created in step 3 above to our pool. Click **Add Member**.
+`c)` Let's add the IP endpoints we created in step 3. above to our pool. Click **Add Member**.
 
 .. figure:: _figures/3_14.png
 
@@ -455,38 +443,109 @@ And then select the second endpoint we’ve just created, as well as the monitor
 
 A newly created pool with the two endpoints will appear on the list.
 
-5. Configure Load Balanced Records
+5. Configure the Load Balanced Record
 ************************************************************************
+
+After creating all of the required DNS Load Balancing elements (IP endpoints, Pool and Monitor), we can create a DNS Load Balancer record with its proximity rule, which will be used to create advanced geo-proximity based routing and will be protected by the F5 Essential App Protect.
+
+`a)` Go to the **Load balanced records** tab and then click **Create**.
 
 .. figure:: _figures/3_19.png
+
+`b)` First, fill in LBR name as "auction", host as "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "auction-pool" pool) to direct requests from anywhere to the pool with two endpoints that we created earlier. Set score of the proximity rule to be "1". This will define the priority of the rule in case if some more are added.
+
+Click **Add Rule**, then check **Enabled**  and **Save** the record.
+
 .. figure:: _figures/3_20.png
+
+`c)` Go back to the **DNS Load Balancer** tab, click on the menu of your service and select **Activate**.
+
 .. figure:: _figures/3_21.png
 
-6. Update EAP App
+The DNS Load Balancer service is now setup.
+
+6. Update the Essential App Protect Instance
 ************************************************************************
+
+For this section we will use the F5 DNS Load Balancer for the Essential App Protect instead of multiple app endpoints in different regions. We will first add the Load Balanced record as the new endpoint to be protected, follow a few steps below. 
+
+`a)` In the F5 Cloud Services portal go to the **Essential App Protect** tab, in the drop-down menu select the app you created in the first section, then proceed to the **PROTECT APPLICATION** card and go to the **General** tab. In the **DEPLOYED REGIONS** section, you can see those two endpoints which we added in the first section. Now let's click **Manage regions** and change the settings.  
 
 .. figure:: _figures/3_40.png
+
+`b)` Click **Add** to set up a new region. 
+
 .. figure:: _figures/3_41.png
+
+`c)` Select **AWS: US East (Ohio) us-east-2** as a new region and **DNS Name** as the endpoint type. Then **Enable HTTP** with port **80** and click **Save**. 
+
 .. figure:: _figures/3_42.png
+
+The new region will appear on the list of your available regions. 
+
+`d)` Now let's delete the two regions which we added in the first section. Check both of them and click **Delete**.
+
 .. figure:: _figures/3_43.png
+
+Only the newly created region will remain on the list.
+
+`e)` Click **Close** to save the new settings.
+
 .. figure:: _figures/3_44.png
+
+Finally, you'll get back to the **General** settings of your Essential App Protect instance and see the updated **DEPLOYED REGIONS** section.
+
 .. figure:: _figures/3_45.png
 
-7. Simulate SQL injection attack
+Now, the Essential App Protect service will now protect the Load Balanced record and in turn the DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose.
+
+7. Simulate SQL Injection Attack
 ************************************************************************
 
-Open link in the browser and click login
-username: ' OR 1=1 --'
-password: 'any value'
+SQL Injection attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found `here <https://bit.ly/2ZUv0Xl>`_.  
+
+Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. In the **LOG IN** window fill in username value as follows (including singls quotes) **' OR 1=1 --'** and use any password as the value. Click **LOGIN**. 
 
 .. figure:: _figures/3_46.png
+
+In the Essential App Protect events you we can see that our SQL Injection attack is blocked.
+
 .. figure:: _figures/3_47.png
 
 
-Cleanup
+Clean Up
 #####################
 
+At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then follow the steps below.
+
+1. Clean Up the Instances
+**********************************
+
+`a)`  First of all, we'll need to change Essential App Protect record type back (if you remember, in the very beginning we updated it from type A to CNAME). Go to Postman and send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
+
 .. figure:: _figures/4_1.png
+
+`b)` After that, send the **Retire DNS Zone (lab)** request to remove or reset zone file. 
+
 .. figure:: _figures/4_2.png
+
+`c)` Now let's return to F5 Cloud Services portal and delete Essential App Protect instance. Open the **Essential App Protect** tab, and select **Delete** in your app's menu. 
+
 .. figure:: _figures/4_3.png
+
+Your instance will be deleted.
+
+`d)` Now let's delete DNS Load Balancer instance. Open the **DNS Load Balancer** tab, and select **Delete** in your service's menu.
+
 .. figure:: _figures/4_4.png
+
+2. Clear Tokens from the Lab Service API
+*********************************
+
+We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the **Logout** request, which uses your **ACCESS_TOKEN**:
+
+.. figure:: _figures/4_5.png
+
+More detailed information on these API requests can be found `here <https://bit.ly/3fsxceU>`_.
+
+We hope you've enjoyed this lab! Sign up for any of the F5 Cloud Services for the full experience!
