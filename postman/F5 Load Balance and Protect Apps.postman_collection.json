@@ -502,6 +502,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"access_token\": \"{{ACCESS_TOKEN}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-auth/logout",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
