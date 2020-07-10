@@ -511,21 +511,51 @@ Now you'll get back to the **General** settings of your Essential App Protect in
 
 From now on, DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose.
 
-7. Simulate SQL injection attack
+7. Simulate SQL Injection Attack
 ************************************************************************
 
-Open link in the browser and click login
-username: ' OR 1=1 --'
-password: 'any value'
+SQL Injection attack inserts a SQL query via the input data field in the web application. Such attacks could potentially read sensitive data, modify and destroy it. More detailed information can be found `here <https://bit.ly/2ZUv0Xl>`_.  
+
+Let's now simulate SQL Injection attack via browser and our "BuyTime Auction" app. Copy your FQDN from the F5 Cloud Services portal and paste to your browser. In the **LOG IN** window fill in username as **' OR 1=1 --'** and password as **any value**. Click **LOGIN**. 
 
 .. figure:: _figures/3_46.png
+
+And you will see that SQL Injection attack is blocked.
+
 .. figure:: _figures/3_47.png
 
 
-Cleanup
+Clean Up
 #####################
 
+At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then follow the steps below.
+
+1. Clean Up the Instances
+**********************************
+
+`a)`  First of all, we'll need to change Essential App Protect record type back (if you remember, in the very beginning we updated it from type A to CNAME). Go to Postman and send the **Reset EAP Record (lab)** request to change record type from CNAME to A back:
+
 .. figure:: _figures/4_1.png
+
+`b)` After that, send the **Retire DNS Zone (lab)** request to remove or reset zone file. 
+
 .. figure:: _figures/4_2.png
+
+`c)` Now let's return to F5 Cloud Services portal and delete Essential App Protect instance. Open the **Essential App Protect** tab, and select **Delete** in your app's menu. 
+
 .. figure:: _figures/4_3.png
+
+Your instance will be deleted.
+
+`d)` Now let's delete DNS Load Balancer instance. Open the **DNS Load Balancer** tab, and select **Delete** in your service's menu.
+
 .. figure:: _figures/4_4.png
+
+2. Clear Tokens from the Lab Service API
+*********************************
+
+We recommend that you clear your tokens from the Lab Service API for security purposes. In order to do that, send the **Logout** request, which uses your **ACCESS_TOKEN**:
+
+.. figure:: _figures/4_5.png
+
+More detailed information on these API requests can be found `here <https://bit.ly/3fsxceU>`_.
