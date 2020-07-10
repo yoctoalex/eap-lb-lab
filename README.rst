@@ -455,22 +455,61 @@ And then select the second endpoint we’ve just created, as well as the monitor
 
 A newly created pool with the two endpoints will appear on the list.
 
-5. Configure Load Balanced Records
+5. Configure Load Balanced Record
 ************************************************************************
+
+After creating all the required components (IP endpoints, Pool and Monitor), we can create a DNS Load Balancer record with its proximity rule, which will be used to create advanced geo-proximity load and will be protected by F5 Essential App Protect.
+
+`a)` Go to the **Load balanced records** tab and then click **Create**.
 
 .. figure:: _figures/3_19.png
+
+`b)` First, fill in LBR name as "auction", host as "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "auction-pool" pool) to direct requests from anywhere to the pool we created earlier with two added endpoints. Set score of the proximity rule to be "1". This will define the priority of the rule in case if some more are added.
+
+Click **Add Rule**, then check **Enabled** tick and **Save** the record.
+
 .. figure:: _figures/3_20.png
+
+`c)` Go back to the **DNS Load Balancer** tab, click on the menu of your service and select **Activate**.
+
 .. figure:: _figures/3_21.png
 
-6. Update EAP App
+The DNS Load Balancer service is now setup.
+
+6. Update Essential App Protect Instance
 ************************************************************************
 
+For this section we will need to set up DNS Load Balancer for the Essential App Protect instead of multiple app endpoints in different regions. To do so, follow a few steps below. 
+
+`a)` In the F5 Cloud Services portal go to the **Essential App Protect** tab, in the drop-down menu select the app you created in the first section, then proceed to the **PROTECT APPLICATION** card and go to the **General** tab. In the **DEPLOYED REGIONS** section, you can see those two endpoints which we added in the first section. Now let's click **Manage regions** and change the settings.  
+
 .. figure:: _figures/3_40.png
+
+`b)` Click **Add** to set up a new region. 
+
 .. figure:: _figures/3_41.png
+
+`c)` Select **AWS: US East (Ohio) us-east-2** as a new region and **DNS Name** as endpoint type. Then **Enable HTTP** with port **80** and click **Save**. 
+
 .. figure:: _figures/3_42.png
+
+The new region will apppear on the list of your available regions. 
+
+`d)` Now let's delete two regions which we added in the first section. Check both of them and click **Delete**.
+
 .. figure:: _figures/3_43.png
+
+Only the newly created region will remain on the list.
+
+`e)` Click **Close** to save the new settings.
+
 .. figure:: _figures/3_44.png
+
+Now you'll get back to the **General** settings of your Essential App Protect instance and see the updated **DEPLOYED REGIONS** section.
+
 .. figure:: _figures/3_45.png
+
+From now on, DNS Load Balancer will monitor endpoint health, and direct traffic to healthy endpoints in the appropriate geographically distinct load-balance pool created for this purpose.
 
 7. Simulate SQL injection attack
 ************************************************************************
