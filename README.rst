@@ -360,8 +360,6 @@ The following diagram captures the core components of this section:
 
 To create a DNS Load Balancer instance, we'll need to get the zone. To do that, send the **Get DNS Zone (lab)** API call. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab.
 
-**TODO: update screenshot**
-
 .. figure:: _figures/3_2.png
 
 **Note** that you need to copy the **zone** name generated in the API response to be used in the next step to create a DNS Load Balancer instance.
